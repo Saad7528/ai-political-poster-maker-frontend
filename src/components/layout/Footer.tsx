@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Sparkles, Printer, CheckCircle, Heart } from 'lucide-react';
+import { Printer, CheckCircle } from 'lucide-react';
 
 export const Footer: React.FC = () => {
   const pathname = usePathname();
@@ -29,7 +29,7 @@ export const Footer: React.FC = () => {
               </div>
               <div>
                 <span className="text-base font-black text-slate-900 dark:text-white font-bengali">
-                  পোস্টার<span className="text-emerald-600 dark:text-emerald-400">মেকার</span>
+                  পোস্টার<span className="theme-text-gradient">মেকার</span>
                 </span>
                 <p className="text-[11px] text-slate-500 dark:text-slate-400 font-bengali">
                   বাংলাদেশি ডিজিটাল রাজনৈতিক ও নির্বাচনী পোস্টার প্ল্যাটফর্ম
@@ -40,7 +40,7 @@ export const Footer: React.FC = () => {
               বাংলাদেশের রাজনৈতিক কর্মী, নেতৃবৃন্দ ও নির্বাচনী প্রচারণার জন্য গুগল জেমিনি এআই চালিত প্রথম স্বয়ংক্রিয় হাই-রেজুলেশন পোস্টার মেকার প্ল্যাটফর্ম।
             </p>
             <div className="flex flex-wrap gap-2 pt-1">
-              <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 text-[11px] border border-emerald-500/20">
+              <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full theme-subtle-bg text-[11px] border theme-border">
                 <CheckCircle className="w-3 h-3" /> নির্ভুল বাংলা টাইপোগ্রাফি
               </span>
               <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-amber-500/10 text-amber-700 dark:text-amber-400 text-[11px] border border-amber-500/20">
@@ -56,17 +56,17 @@ export const Footer: React.FC = () => {
             </h4>
             <ul className="space-y-2">
               <li>
-                <Link href="/templates" className="hover:text-emerald-600 dark:hover:text-amber-400 transition-colors">
+                <Link href="/templates" className="hover:theme-text-accent transition-colors">
                   টেমপ্লেট গ্যালারি
                 </Link>
               </li>
               <li>
-                <Link href="/studio" className="hover:text-emerald-600 dark:hover:text-amber-400 transition-colors">
+                <Link href="/studio" className="hover:theme-text-accent transition-colors">
                   পোস্টার স্টুডিও ও কাস্টমাইজার
                 </Link>
               </li>
               <li>
-                <Link href="/history" className="hover:text-emerald-600 dark:hover:text-amber-400 transition-colors">
+                <Link href="/history" className="hover:theme-text-accent transition-colors">
                   সংরক্ষিত পোস্টার হিস্ট্রি
                 </Link>
               </li>
