@@ -5,6 +5,180 @@
 @layer base {
   :root {
     --font-bengali: 'Hind Siliguri', 'Noto Serif Bengali', sans-serif;
+
+    /* Default (Emerald) */
+    --primary-start: #059669;
+    --primary-mid: #047857;
+    --primary-end: #0f766e;
+    --primary-accent: #059669;
+    --primary-accent-hover: #047857;
+    --primary-glow: rgba(5, 150, 105, 0.25);
+    --primary-glow-strong: rgba(5, 150, 105, 0.45);
+    --primary-subtle: rgba(5, 150, 105, 0.1);
+    --primary-subtle-hover: rgba(5, 150, 105, 0.2);
+    --primary-border: rgba(5, 150, 105, 0.3);
+    --primary-text: #047857;
+    --primary-text-dark: #34d399;
+  }
+
+  /* 1. Emerald */
+  html[data-palette="emerald"], :root[data-palette="emerald"] {
+    --primary-start: #059669;
+    --primary-mid: #047857;
+    --primary-end: #0f766e;
+    --primary-accent: #059669;
+    --primary-accent-hover: #047857;
+    --primary-glow: rgba(5, 150, 105, 0.25);
+    --primary-glow-strong: rgba(5, 150, 105, 0.45);
+    --primary-subtle: rgba(5, 150, 105, 0.1);
+    --primary-subtle-hover: rgba(5, 150, 105, 0.2);
+    --primary-border: rgba(5, 150, 105, 0.3);
+    --primary-text: #047857;
+    --primary-text-dark: #34d399;
+  }
+
+  /* 2. Royal Purple */
+  html[data-palette="purple"], :root[data-palette="purple"] {
+    --primary-start: #7c3aed;
+    --primary-mid: #6d28d9;
+    --primary-end: #4338ca;
+    --primary-accent: #7c3aed;
+    --primary-accent-hover: #6d28d9;
+    --primary-glow: rgba(124, 58, 237, 0.25);
+    --primary-glow-strong: rgba(124, 58, 237, 0.45);
+    --primary-subtle: rgba(124, 58, 237, 0.1);
+    --primary-subtle-hover: rgba(124, 58, 237, 0.2);
+    --primary-border: rgba(124, 58, 237, 0.3);
+    --primary-text: #6d28d9;
+    --primary-text-dark: #a78bfa;
+  }
+
+  /* 3. Solar Amber */
+  html[data-palette="amber"], :root[data-palette="amber"] {
+    --primary-start: #f59e0b;
+    --primary-mid: #ea580c;
+    --primary-end: #dc2626;
+    --primary-accent: #ea580c;
+    --primary-accent-hover: #c2410c;
+    --primary-glow: rgba(234, 88, 12, 0.25);
+    --primary-glow-strong: rgba(234, 88, 12, 0.45);
+    --primary-subtle: rgba(234, 88, 12, 0.12);
+    --primary-subtle-hover: rgba(234, 88, 12, 0.22);
+    --primary-border: rgba(234, 88, 12, 0.35);
+    --primary-text: #c2410c;
+    --primary-text-dark: #fb923c;
+  }
+
+  /* 4. Ocean Sapphire */
+  html[data-palette="blue"], :root[data-palette="blue"] {
+    --primary-start: #2563eb;
+    --primary-mid: #1d4ed8;
+    --primary-end: #0891b2;
+    --primary-accent: #2563eb;
+    --primary-accent-hover: #1d4ed8;
+    --primary-glow: rgba(37, 99, 235, 0.25);
+    --primary-glow-strong: rgba(37, 99, 235, 0.45);
+    --primary-subtle: rgba(37, 99, 235, 0.1);
+    --primary-subtle-hover: rgba(37, 99, 235, 0.2);
+    --primary-border: rgba(37, 99, 235, 0.3);
+    --primary-text: #1d4ed8;
+    --primary-text-dark: #60a5fa;
+  }
+
+  /* 5. Crimson Rose */
+  html[data-palette="rose"], :root[data-palette="rose"] {
+    --primary-start: #e11d48;
+    --primary-mid: #be123c;
+    --primary-end: #9f1239;
+    --primary-accent: #e11d48;
+    --primary-accent-hover: #be123c;
+    --primary-glow: rgba(225, 29, 72, 0.25);
+    --primary-glow-strong: rgba(225, 29, 72, 0.45);
+    --primary-subtle: rgba(225, 29, 72, 0.1);
+    --primary-subtle-hover: rgba(225, 29, 72, 0.2);
+    --primary-border: rgba(225, 29, 72, 0.3);
+    --primary-text: #be123c;
+    --primary-text-dark: #fb7185;
+  }
+
+  /* 6. Cyber Teal */
+  html[data-palette="teal"], :root[data-palette="teal"] {
+    --primary-start: #0d9488;
+    --primary-mid: #0f766e;
+    --primary-end: #0284c7;
+    --primary-accent: #0d9488;
+    --primary-accent-hover: #0f766e;
+    --primary-glow: rgba(13, 148, 136, 0.25);
+    --primary-glow-strong: rgba(13, 148, 136, 0.45);
+    --primary-subtle: rgba(13, 148, 136, 0.1);
+    --primary-subtle-hover: rgba(13, 148, 136, 0.2);
+    --primary-border: rgba(13, 148, 136, 0.3);
+    --primary-text: #0f766e;
+    --primary-text-dark: #2dd4bf;
+  }
+
+  /* 7. Imperial Gold */
+  html[data-palette="gold"], :root[data-palette="gold"] {
+    --primary-start: #d97706;
+    --primary-mid: #b45309;
+    --primary-end: #92400e;
+    --primary-accent: #d97706;
+    --primary-accent-hover: #b45309;
+    --primary-glow: rgba(217, 119, 6, 0.25);
+    --primary-glow-strong: rgba(217, 119, 6, 0.45);
+    --primary-subtle: rgba(217, 119, 6, 0.12);
+    --primary-subtle-hover: rgba(217, 119, 6, 0.22);
+    --primary-border: rgba(217, 119, 6, 0.35);
+    --primary-text: #b45309;
+    --primary-text-dark: #fbbf24;
+  }
+
+  /* 8. Midnight Indigo */
+  html[data-palette="indigo"], :root[data-palette="indigo"] {
+    --primary-start: #4f46e5;
+    --primary-mid: #4338ca;
+    --primary-end: #312e81;
+    --primary-accent: #4f46e5;
+    --primary-accent-hover: #4338ca;
+    --primary-glow: rgba(79, 70, 229, 0.25);
+    --primary-glow-strong: rgba(79, 70, 229, 0.45);
+    --primary-subtle: rgba(79, 70, 229, 0.1);
+    --primary-subtle-hover: rgba(79, 70, 229, 0.2);
+    --primary-border: rgba(79, 70, 229, 0.3);
+    --primary-text: #4338ca;
+    --primary-text-dark: #818cf8;
+  }
+
+  /* 9. Electric Lime */
+  html[data-palette="lime"], :root[data-palette="lime"] {
+    --primary-start: #65a30d;
+    --primary-mid: #4d7c0f;
+    --primary-end: #15803d;
+    --primary-accent: #65a30d;
+    --primary-accent-hover: #4d7c0f;
+    --primary-glow: rgba(101, 163, 13, 0.25);
+    --primary-glow-strong: rgba(101, 163, 13, 0.45);
+    --primary-subtle: rgba(101, 163, 13, 0.12);
+    --primary-subtle-hover: rgba(101, 163, 13, 0.22);
+    --primary-border: rgba(101, 163, 13, 0.35);
+    --primary-text: #4d7c0f;
+    --primary-text-dark: #a3e635;
+  }
+
+  /* 10. Sunset Fuchsia */
+  html[data-palette="fuchsia"], :root[data-palette="fuchsia"] {
+    --primary-start: #c026d3;
+    --primary-mid: #a21caf;
+    --primary-end: #be185d;
+    --primary-accent: #c026d3;
+    --primary-accent-hover: #a21caf;
+    --primary-glow: rgba(192, 38, 211, 0.25);
+    --primary-glow-strong: rgba(192, 38, 211, 0.45);
+    --primary-subtle: rgba(192, 38, 211, 0.1);
+    --primary-subtle-hover: rgba(192, 38, 211, 0.2);
+    --primary-border: rgba(192, 38, 211, 0.3);
+    --primary-text: #a21caf;
+    --primary-text-dark: #f472b6;
   }
 
   html.dark {
@@ -19,10 +193,73 @@
     font-family: var(--font-bengali);
     transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    transition-duration: 150ms;
+    transition-duration: 200ms;
   }
 }
 
 .font-bengali {
   font-family: var(--font-bengali);
+}
+
+/* Dynamic Theme Utilities */
+.theme-bg-primary {
+  background-color: var(--primary-accent) !important;
+}
+
+.theme-bg-gradient {
+  background: linear-gradient(135deg, var(--primary-start) 0%, var(--primary-mid) 50%, var(--primary-end) 100%) !important;
+}
+
+.theme-btn-primary {
+  background: linear-gradient(135deg, var(--primary-start) 0%, var(--primary-mid) 50%, var(--primary-end) 100%);
+  color: #ffffff !important;
+  box-shadow: 0 4px 14px 0 var(--primary-glow);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.theme-btn-primary:hover {
+  filter: brightness(1.08);
+  box-shadow: 0 6px 20px 0 var(--primary-glow-strong);
+}
+
+.theme-btn-primary:active {
+  transform: scale(0.97);
+}
+
+.theme-text-gradient {
+  background: linear-gradient(135deg, var(--primary-start) 0%, var(--primary-mid) 50%, var(--primary-end) 100%);
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+.theme-text-accent {
+  color: var(--primary-text) !important;
+}
+
+html.dark .theme-text-accent {
+  color: var(--primary-text-dark) !important;
+}
+
+.theme-subtle-bg {
+  background-color: var(--primary-subtle) !important;
+  color: var(--primary-text) !important;
+}
+
+html.dark .theme-subtle-bg {
+  background-color: var(--primary-subtle) !important;
+  color: var(--primary-text-dark) !important;
+}
+
+.theme-border {
+  border-color: var(--primary-border) !important;
+}
+
+.theme-glow-border {
+  border-color: var(--primary-border) !important;
+  box-shadow: 0 0 15px 0 var(--primary-glow);
+}
+
+.theme-ring-focus:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--primary-accent);
 }
