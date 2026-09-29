@@ -112,7 +112,7 @@ export default function HistoryPage() {
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-6">
         <div>
           <div className="flex items-center gap-2">
-            <History className="w-6 h-6 text-emerald-600 dark:text-amber-500" />
+            <History className="w-6 h-6 theme-text-accent" />
             <h1 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
               আমার সংরক্ষিত পোস্টারসমূহ
             </h1>
@@ -124,7 +124,7 @@ export default function HistoryPage() {
 
         <Link
           href="/studio"
-          className="w-full sm:w-auto inline-flex items-center justify-center px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs font-bold shadow-md shadow-emerald-700/20 active:scale-95 transition-all"
+          className="w-full sm:w-auto inline-flex items-center justify-center px-5 py-2.5 rounded-xl theme-btn-primary text-xs font-bold active:scale-95 transition-all"
         >
           <span>নতুন পোস্টার তৈরি করুন</span>
         </Link>
@@ -132,12 +132,12 @@ export default function HistoryPage() {
 
       {loading ? (
         <div className="py-20 flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 gap-3">
-          <Loader2 className="w-8 h-8 animate-spin text-emerald-600 dark:text-amber-500" />
+          <Loader2 className="w-8 h-8 animate-spin theme-text-accent" />
           <p className="text-xs">পোস্টার হিস্ট্রি লোড হচ্ছে...</p>
         </div>
       ) : isAuthRequired ? (
-        <div className="p-10 sm:p-12 text-center rounded-3xl bg-white dark:bg-slate-900/80 border-2 border-emerald-500/30 dark:border-amber-400/30 space-y-5 max-w-md mx-auto shadow-xl">
-          <div className="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br from-emerald-500/20 to-amber-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-600 dark:text-amber-400">
+        <div className="p-10 sm:p-12 text-center rounded-3xl bg-white dark:bg-slate-900/80 border-2 theme-border space-y-5 max-w-md mx-auto shadow-xl">
+          <div className="w-16 h-16 mx-auto rounded-2xl theme-subtle-bg border theme-border flex items-center justify-center">
             <History className="w-8 h-8" />
           </div>
           <div className="space-y-2">
@@ -151,7 +151,7 @@ export default function HistoryPage() {
           <div className="flex items-center justify-center pt-2">
             <Link
               href="/auth?redirect=/history"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs font-bold shadow-md shadow-emerald-700/20 transition-all active:scale-95"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3 rounded-2xl theme-btn-primary text-xs font-bold transition-all active:scale-95"
             >
               <span>লগইন / রেজিস্টার করুন</span>
             </Link>
@@ -168,7 +168,7 @@ export default function HistoryPage() {
           </p>
           <Link
             href="/studio"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold shadow-md transition-all active:scale-95"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl theme-btn-primary text-xs font-bold transition-all active:scale-95"
           >
             <Layers className="w-4 h-4" />
             <span>পোস্টার স্টুডিও খুলুন</span>
@@ -186,7 +186,7 @@ export default function HistoryPage() {
             return (
               <div
                 key={poster._id}
-                className="group rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-2xl hover:border-emerald-500/50 dark:hover:border-amber-400/50 transition-all duration-300 flex flex-col justify-between overflow-hidden"
+                className="group rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-2xl hover:border-slate-400 dark:hover:border-slate-600 transition-all duration-300 flex flex-col justify-between overflow-hidden"
               >
                 {/* Poster Visual Preview Container */}
                 <div className="relative aspect-[3/4] bg-slate-950 overflow-hidden cursor-pointer">
@@ -201,7 +201,7 @@ export default function HistoryPage() {
                   ) : (
                     <div
                       onClick={() => setPreviewPoster(poster)}
-                      className="w-full h-full flex flex-col justify-between p-5 bg-gradient-to-b from-emerald-950 via-teal-950 to-slate-950 text-white relative border-4 border-amber-400/30"
+                      className="w-full h-full flex flex-col justify-between p-5 bg-gradient-to-b from-slate-900 via-slate-950 to-black text-white relative border-4 border-amber-400/30"
                     >
                       <div className="text-center space-y-1">
                         <span className="text-[10px] text-amber-300 font-bold tracking-wider">
@@ -221,7 +221,7 @@ export default function HistoryPage() {
                             className="w-28 h-28 object-cover rounded-full border-4 border-amber-400 shadow-xl"
                           />
                         ) : (
-                          <div className="w-24 h-24 rounded-full bg-emerald-800/80 border-2 border-amber-400/50 flex items-center justify-center text-amber-300 font-black text-2xl">
+                          <div className="w-24 h-24 rounded-full bg-slate-800 border-2 border-amber-400/50 flex items-center justify-center text-amber-300 font-black text-2xl">
                             {candidateName.charAt(0)}
                           </div>
                         )}
@@ -244,7 +244,7 @@ export default function HistoryPage() {
                       <Calendar className="w-3 h-3 text-amber-400" />
                       {new Date(poster.createdAt).toLocaleDateString('bn-BD')}
                     </span>
-                    <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/90 text-white backdrop-blur-md shadow-sm">
+                    <span className="px-2 py-0.5 rounded-full text-[10px] font-bold theme-bg-primary text-white backdrop-blur-md shadow-sm">
                       {poster.status === 'completed' ? 'সম্পূর্ণ' : poster.status}
                     </span>
                   </div>
@@ -266,7 +266,7 @@ export default function HistoryPage() {
                     <h3 className="text-base font-black text-slate-900 dark:text-white line-clamp-1">
                       {candidateName}
                     </h3>
-                    <p className="text-xs text-emerald-700 dark:text-amber-300 line-clamp-1 font-bold">
+                    <p className="text-xs theme-text-accent line-clamp-1 font-bold">
                       {designation} {party ? `— ${party}` : ''}
                     </p>
                     <p className="text-xs text-slate-600 dark:text-slate-400 line-clamp-1 italic">
@@ -289,7 +289,7 @@ export default function HistoryPage() {
                       <button
                         type="button"
                         onClick={() => handleDownloadImage(poster)}
-                        className="p-2 rounded-xl text-slate-400 hover:text-emerald-600 hover:bg-emerald-500/10 transition-colors"
+                        className="p-2 rounded-xl text-slate-400 hover:theme-text-accent hover:theme-subtle-bg transition-colors"
                         title="ছবি ডাউনলোড করুন"
                       >
                         <Download className="w-4 h-4" />
@@ -298,7 +298,7 @@ export default function HistoryPage() {
 
                     <Link
                       href={`/studio?posterId=${poster._id}`}
-                      className="flex-1 flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs font-bold shadow-sm hover:shadow transition-all"
+                      className="flex-1 flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl theme-btn-primary text-xs font-bold transition-all"
                     >
                       <Edit3 className="w-3.5 h-3.5" />
                       <span>স্টুডিওতে খুলুন ও এডিট করুন</span>
@@ -359,7 +359,7 @@ export default function HistoryPage() {
                 <button
                   type="button"
                   onClick={() => handleDownloadImage(previewPoster)}
-                  className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition-all shadow-md"
+                  className="flex items-center gap-1.5 px-4 py-2 rounded-xl theme-btn-primary text-xs font-bold transition-all"
                 >
                   <Download className="w-4 h-4" />
                   <span>ডাউনলোড করুন</span>
