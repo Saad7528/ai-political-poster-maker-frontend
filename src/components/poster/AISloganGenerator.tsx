@@ -203,11 +203,11 @@ export const AISloganGenerator: React.FC<AISloganGeneratorProps> = ({
   };
 
   return (
-    <div className="p-5 rounded-3xl border border-emerald-500/30 bg-gradient-to-br from-emerald-500/5 via-slate-500/5 to-teal-500/10 dark:from-emerald-950/20 dark:via-slate-900/40 dark:to-teal-950/20 shadow-lg space-y-4">
+    <div className="p-5 rounded-3xl border theme-border bg-white dark:bg-slate-900 shadow-lg space-y-4">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 border-b border-slate-200 dark:border-slate-800 pb-3">
         <div className="flex items-center gap-2.5">
-          <div className="p-2 rounded-2xl bg-gradient-to-tr from-emerald-600 to-teal-600 text-white shadow-md shadow-emerald-600/20">
+          <div className="p-2 rounded-2xl theme-btn-primary text-white shadow-md">
             <Sparkles className="w-5 h-5 fill-current animate-pulse" />
           </div>
           <div>
@@ -238,8 +238,8 @@ export const AISloganGenerator: React.FC<AISloganGeneratorProps> = ({
           className={`w-full pl-4 pr-24 py-3 rounded-2xl border ${
             isListening
               ? 'border-rose-500 ring-2 ring-rose-500/30 bg-rose-50/20 dark:bg-rose-950/20'
-              : 'border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 focus:ring-2 focus:ring-emerald-500'
-          } text-slate-900 dark:text-white text-xs font-bengali focus:outline-none transition-all`}
+              : 'border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 focus:outline-none theme-ring-focus'
+          } text-slate-900 dark:text-white text-xs font-bengali transition-all`}
         />
 
         {/* Action Controls inside Input Field */}
@@ -265,7 +265,7 @@ export const AISloganGenerator: React.FC<AISloganGeneratorProps> = ({
             className={`p-2 rounded-xl transition-all font-bengali flex items-center justify-center ${
               isListening
                 ? 'bg-rose-600 text-white shadow-lg shadow-rose-600/30 animate-pulse scale-105'
-                : 'bg-slate-100 dark:bg-slate-800 hover:bg-emerald-50 dark:hover:bg-emerald-950/50 text-slate-600 dark:text-slate-300 hover:text-emerald-600 border border-slate-200 dark:border-slate-700'
+                : 'bg-slate-100 dark:bg-slate-800 hover:theme-subtle-bg hover:theme-text-accent text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700'
             }`}
           >
             {isListening ? (
@@ -284,7 +284,7 @@ export const AISloganGenerator: React.FC<AISloganGeneratorProps> = ({
             type="button"
             onClick={handleGenerate}
             disabled={loading}
-            className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 via-emerald-700 to-teal-700 hover:from-emerald-500 hover:to-teal-600 text-white font-bold text-xs shadow-md shadow-emerald-700/20 transition-all active:scale-95 disabled:opacity-50 font-bengali"
+            className="flex items-center gap-2 px-5 py-2.5 rounded-xl theme-btn-primary font-bold text-xs transition-all active:scale-95 disabled:opacity-50 font-bengali"
           >
             {loading ? (
               <>
@@ -312,7 +312,7 @@ export const AISloganGenerator: React.FC<AISloganGeneratorProps> = ({
         </div>
 
         {applied && (
-          <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400 font-bengali flex items-center gap-1">
+          <span className="text-xs font-bold theme-text-accent font-bengali flex items-center gap-1">
             <CheckCircle2 className="w-4 h-4" /> ক্যানভাসে প্রয়োগ করা হয়েছে!
           </span>
         )}
