@@ -28,7 +28,7 @@ export const PartySymbolSelector: React.FC<PartySymbolSelectorProps> = ({
   return (
     <div className="space-y-3 font-bengali">
       <label className="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
-        <Flag className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+        <Flag className="w-4 h-4 theme-text-accent" />
         <span>রাজনৈতিক দল ও নির্বাচনী প্রতীক</span>
       </label>
 
@@ -42,7 +42,7 @@ export const PartySymbolSelector: React.FC<PartySymbolSelectorProps> = ({
               onClick={() => onSelectParty(party)}
               className={`flex items-center gap-3 p-3 rounded-2xl border text-left transition-all relative overflow-hidden ${
                 isSelected
-                  ? 'border-emerald-500 dark:border-amber-400 bg-emerald-50/90 dark:bg-emerald-950/70 text-slate-900 dark:text-white shadow-md ring-2 ring-emerald-500/25 dark:ring-amber-400/40'
+                  ? 'theme-border theme-subtle-bg text-slate-900 dark:text-white shadow-md ring-2 theme-glow-border'
                   : 'border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/60 hover:bg-slate-50 dark:hover:bg-slate-800/80 text-slate-700 dark:text-slate-200 shadow-sm'
               }`}
             >
@@ -63,7 +63,7 @@ export const PartySymbolSelector: React.FC<PartySymbolSelectorProps> = ({
                 <p
                   className={`text-[11px] font-bold mt-0.5 ${
                     isSelected
-                      ? 'text-emerald-700 dark:text-amber-300'
+                      ? 'theme-text-accent'
                       : 'text-slate-500 dark:text-slate-400'
                   }`}
                 >
@@ -83,7 +83,7 @@ export const PartySymbolSelector: React.FC<PartySymbolSelectorProps> = ({
         <button
           type="button"
           onClick={() => fileInputRef.current?.click()}
-          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-dashed border-emerald-500/50 bg-emerald-50 dark:bg-emerald-500/10 hover:bg-emerald-100 dark:hover:bg-emerald-500/20 text-emerald-700 dark:text-emerald-400 text-xs font-bold transition-colors shadow-sm"
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-dashed theme-border theme-subtle-bg text-xs font-bold transition-colors shadow-sm"
         >
           <Upload className="w-3.5 h-3.5" />
           <span>কাস্টম প্রতীক আপলোড</span>
