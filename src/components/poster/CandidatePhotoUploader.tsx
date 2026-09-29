@@ -209,7 +209,7 @@ export const CandidatePhotoUploader: React.FC<CandidatePhotoUploaderProps> = ({
     <div className="space-y-4 font-bengali">
       <div className="flex items-center justify-between">
         <label className="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
-          <User className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+          <User className="w-4 h-4 theme-text-accent" />
           <span>👤 মূল প্রার্থীর ছবি ও ফ্রেম স্টাইল</span>
         </label>
         {photoUrl && (
@@ -238,8 +238,8 @@ export const CandidatePhotoUploader: React.FC<CandidatePhotoUploaderProps> = ({
           onDrop={handleDrop}
           onClick={() => fileInputRef.current?.click()}
           className={`border-2 border-dashed rounded-3xl p-8 text-center cursor-pointer transition-all ${dragOver
-              ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-950/20 scale-[0.99]'
-              : 'border-slate-300 dark:border-slate-700 hover:border-emerald-500/70 hover:bg-slate-50 dark:hover:bg-slate-800/40 bg-white dark:bg-slate-900/60 shadow-sm'
+              ? 'theme-border theme-subtle-bg scale-[0.99]'
+              : 'border-slate-300 dark:border-slate-700 hover:theme-border hover:bg-slate-50 dark:hover:bg-slate-800/40 bg-white dark:bg-slate-900/60 shadow-sm'
             }`}
         >
           <input
@@ -249,7 +249,7 @@ export const CandidatePhotoUploader: React.FC<CandidatePhotoUploaderProps> = ({
             onChange={handleFileChange}
             className="hidden"
           />
-          <div className="w-14 h-14 mx-auto rounded-full bg-emerald-500/10 flex items-center justify-center text-emerald-600 dark:text-emerald-400 mb-3 shadow-inner">
+          <div className="w-14 h-14 mx-auto rounded-full theme-subtle-bg flex items-center justify-center mb-3 shadow-inner">
             <Upload className="w-7 h-7" />
           </div>
           <p className="text-sm font-bold text-slate-900 dark:text-slate-100">
@@ -264,14 +264,14 @@ export const CandidatePhotoUploader: React.FC<CandidatePhotoUploaderProps> = ({
           {/* Thumbnail preview + Action Buttons */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
             <div className="flex items-center gap-3">
-              <div className="w-16 h-16 rounded-2xl overflow-hidden bg-slate-950 border border-emerald-500/50 flex-shrink-0 relative shadow-inner">
+              <div className="w-16 h-16 rounded-2xl overflow-hidden bg-slate-950 border theme-border flex-shrink-0 relative shadow-inner">
                 <img src={photoUrl} alt="Candidate" className="w-full h-full object-cover" />
               </div>
               <div className="min-w-0">
                 <p className="text-xs font-bold text-slate-900 dark:text-white truncate">
                   {candidateName || 'প্রার্থীর ছবি সংযুক্ত'}
                 </p>
-                <p className="text-[11px] text-emerald-600 dark:text-emerald-400 font-bold flex items-center gap-1 mt-0.5">
+                <p className="text-[11px] theme-text-accent font-bold flex items-center gap-1 mt-0.5">
                   <Check className="w-3.5 h-3.5" /> ক্যানভাসে সরাসরি টেনে সরানো যাবে
                 </p>
               </div>
@@ -334,7 +334,7 @@ export const CandidatePhotoUploader: React.FC<CandidatePhotoUploaderProps> = ({
                     type="button"
                     onClick={() => onChangeAdjustments({ frameStyle: opt.id })}
                     className={`py-2 px-2.5 rounded-xl text-xs font-bold transition-all text-center border ${isSelected
-                        ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 ring-2 ring-emerald-500/25'
+                        ? 'theme-border theme-subtle-bg theme-text-accent ring-2 theme-glow-border'
                         : 'border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-100'
                       }`}
                   >
@@ -349,7 +349,7 @@ export const CandidatePhotoUploader: React.FC<CandidatePhotoUploaderProps> = ({
           <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-3.5">
             <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-2">
               <span className="text-xs font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
-                <SlidersHorizontal className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+                <SlidersHorizontal className="w-3.5 h-3.5 theme-text-accent" />
                 <span>ফ্রেমের সাইজ, জুম ও নিখুঁত পজিশন কন্ট্রোল:</span>
               </span>
               <button
@@ -412,7 +412,7 @@ export const CandidatePhotoUploader: React.FC<CandidatePhotoUploaderProps> = ({
               <div className="space-y-1.5">
                 <div className="flex items-center justify-between text-xs text-slate-700 dark:text-slate-300 font-bold">
                   <span>ছবির জুম (Scale):</span>
-                  <span className="font-mono text-emerald-600 dark:text-emerald-400 font-black">
+                  <span className="font-mono theme-text-accent font-black">
                     {Math.round(scale * 100)}%
                   </span>
                 </div>
@@ -423,7 +423,7 @@ export const CandidatePhotoUploader: React.FC<CandidatePhotoUploaderProps> = ({
                   step="0.05"
                   value={scale}
                   onChange={(e) => onChangeAdjustments({ scale: parseFloat(e.target.value) })}
-                  className="w-full accent-emerald-600 h-2 bg-slate-200 dark:bg-slate-700 rounded-lg cursor-pointer"
+                  className="w-full accent-[var(--primary-accent)] h-2 bg-slate-200 dark:bg-slate-700 rounded-lg cursor-pointer"
                 />
               </div>
 
@@ -431,7 +431,7 @@ export const CandidatePhotoUploader: React.FC<CandidatePhotoUploaderProps> = ({
               <div className="space-y-1.5">
                 <div className="flex items-center justify-between text-xs text-slate-700 dark:text-slate-300 font-bold">
                   <span>উপরে / নিচে (Y):</span>
-                  <span className="font-mono text-emerald-600 dark:text-emerald-400 font-black">
+                  <span className="font-mono theme-text-accent font-black">
                     {posY > 0 ? `+${posY}` : posY}px
                   </span>
                 </div>
@@ -442,7 +442,7 @@ export const CandidatePhotoUploader: React.FC<CandidatePhotoUploaderProps> = ({
                   step="1"
                   value={posY}
                   onChange={(e) => onChangeAdjustments({ posY: parseInt(e.target.value) })}
-                  className="w-full accent-emerald-600 h-2 bg-slate-200 dark:bg-slate-700 rounded-lg cursor-pointer"
+                  className="w-full accent-[var(--primary-accent)] h-2 bg-slate-200 dark:bg-slate-700 rounded-lg cursor-pointer"
                 />
               </div>
 
@@ -450,7 +450,7 @@ export const CandidatePhotoUploader: React.FC<CandidatePhotoUploaderProps> = ({
               <div className="space-y-1.5">
                 <div className="flex items-center justify-between text-xs text-slate-700 dark:text-slate-300 font-bold">
                   <span>ডানে / বামে (X):</span>
-                  <span className="font-mono text-emerald-600 dark:text-emerald-400 font-black">
+                  <span className="font-mono theme-text-accent font-black">
                     {posX > 0 ? `+${posX}` : posX}px
                   </span>
                 </div>
@@ -461,7 +461,7 @@ export const CandidatePhotoUploader: React.FC<CandidatePhotoUploaderProps> = ({
                   step="1"
                   value={posX}
                   onChange={(e) => onChangeAdjustments({ posX: parseInt(e.target.value) })}
-                  className="w-full accent-emerald-600 h-2 bg-slate-200 dark:bg-slate-700 rounded-lg cursor-pointer"
+                  className="w-full accent-[var(--primary-accent)] h-2 bg-slate-200 dark:bg-slate-700 rounded-lg cursor-pointer"
                 />
               </div>
             </div>
