@@ -357,7 +357,7 @@ export const PosterStudio: React.FC<PosterStudioProps> = ({ initialTemplate }) =
           type="button"
           onClick={handleSavePoster}
           disabled={generating}
-          className="flex items-center justify-center gap-2 px-6 py-3 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm shadow-xl shadow-emerald-600/20 transition-all font-bengali disabled:opacity-50 active:scale-95"
+          className="flex items-center justify-center gap-2 px-6 py-3 rounded-2xl theme-btn-primary font-bold text-sm transition-all font-bengali disabled:opacity-50 active:scale-95"
         >
           {generating ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
           <span>পোস্টার হিস্ট্রিতে সেভ করুন</span>
@@ -365,14 +365,14 @@ export const PosterStudio: React.FC<PosterStudioProps> = ({ initialTemplate }) =
       </div>
 
       {successMessage && (
-        <div className="p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-between gap-3 text-emerald-700 dark:text-emerald-400 text-sm font-bengali font-bold">
+        <div className="p-4 rounded-2xl theme-subtle-bg border theme-border flex items-center justify-between gap-3 text-sm font-bengali font-bold">
           <div className="flex items-center gap-2">
             <CheckCircle2 className="w-5 h-5 flex-shrink-0" />
             <span>{successMessage}</span>
           </div>
           <a
             href="/history"
-            className="px-3 py-1 rounded-xl bg-emerald-600 text-white text-xs hover:bg-emerald-500 transition-colors shadow-sm"
+            className="px-3 py-1 rounded-xl theme-btn-primary text-xs transition-colors shadow-sm"
           >
             আমার হিস্ট্রি দেখুন →
           </a>
@@ -387,7 +387,7 @@ export const PosterStudio: React.FC<PosterStudioProps> = ({ initialTemplate }) =
           {errorMessage.includes('লগইন') && (
             <a
               href="/auth?redirect=/studio"
-              className="px-3.5 py-1.5 rounded-xl bg-emerald-600 text-white text-xs hover:bg-emerald-500 transition-colors shadow-sm whitespace-nowrap"
+              className="px-3.5 py-1.5 rounded-xl theme-btn-primary text-xs transition-colors shadow-sm whitespace-nowrap"
             >
               লগইন করুন →
             </a>
@@ -460,7 +460,7 @@ export const PosterStudio: React.FC<PosterStudioProps> = ({ initialTemplate }) =
           {/* Candidate Information Form */}
           <div className="p-5 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
             <h3 className="text-sm font-bold text-slate-900 dark:text-white font-bengali flex items-center gap-2">
-              <User className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+              <User className="w-4 h-4 theme-text-accent" />
               <span>প্রার্থীর তথ্য ও ব্যানার টেক্সট</span>
             </h3>
 
@@ -473,7 +473,7 @@ export const PosterStudio: React.FC<PosterStudioProps> = ({ initialTemplate }) =
                   type="text"
                   value={formData.candidateName}
                   onChange={(e) => setFormData((prev) => ({ ...prev, candidateName: e.target.value }))}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white text-xs font-bengali font-bold focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white text-xs font-bengali font-bold focus:outline-none theme-ring-focus"
                 />
               </div>
 
@@ -485,7 +485,7 @@ export const PosterStudio: React.FC<PosterStudioProps> = ({ initialTemplate }) =
                   type="text"
                   value={formData.designation}
                   onChange={(e) => setFormData((prev) => ({ ...prev, designation: e.target.value }))}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white text-xs font-bengali font-bold focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                  className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white text-xs font-bengali font-bold focus:outline-none theme-ring-focus"
                 />
               </div>
             </div>
@@ -498,7 +498,7 @@ export const PosterStudio: React.FC<PosterStudioProps> = ({ initialTemplate }) =
                 type="text"
                 value={formData.headline}
                 onChange={(e) => setFormData((prev) => ({ ...prev, headline: e.target.value }))}
-                className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white text-xs font-bengali font-bold focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white text-xs font-bengali font-bold focus:outline-none theme-ring-focus"
               />
             </div>
 
@@ -510,7 +510,7 @@ export const PosterStudio: React.FC<PosterStudioProps> = ({ initialTemplate }) =
                 type="text"
                 value={formData.subheadline}
                 onChange={(e) => setFormData((prev) => ({ ...prev, subheadline: e.target.value }))}
-                className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white text-xs font-bengali focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white text-xs font-bengali focus:outline-none theme-ring-focus"
               />
             </div>
 
@@ -522,7 +522,7 @@ export const PosterStudio: React.FC<PosterStudioProps> = ({ initialTemplate }) =
                 type="text"
                 value={formData.slogan}
                 onChange={(e) => setFormData((prev) => ({ ...prev, slogan: e.target.value }))}
-                className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white text-xs font-bengali focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white text-xs font-bengali focus:outline-none theme-ring-focus"
               />
             </div>
 
@@ -578,7 +578,7 @@ export const PosterStudio: React.FC<PosterStudioProps> = ({ initialTemplate }) =
         <div className="lg:col-span-5 sticky top-24 flex flex-col items-center">
           <div className="w-full flex items-center justify-between mb-3 px-1">
             <span className="text-xs font-bold text-slate-800 dark:text-slate-200 flex items-center gap-1.5 font-bengali">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="w-2 h-2 rounded-full theme-bg-primary animate-pulse" />
               লাইভ প্রিভিউ (রিয়েল-টাইম)
             </span>
             <span className="text-[11px] text-slate-500 dark:text-slate-400 font-medium">
@@ -621,7 +621,7 @@ export const PosterStudio: React.FC<PosterStudioProps> = ({ initialTemplate }) =
             className="relative max-w-md w-full bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800 shadow-2xl space-y-5 text-center font-bengali"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="w-16 h-16 mx-auto rounded-2xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 flex items-center justify-center shadow-sm">
+            <div className="w-16 h-16 mx-auto rounded-2xl theme-subtle-bg border theme-border flex items-center justify-center shadow-sm">
               <LogIn className="w-8 h-8" />
             </div>
 
@@ -637,7 +637,7 @@ export const PosterStudio: React.FC<PosterStudioProps> = ({ initialTemplate }) =
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
               <a
                 href="/auth?redirect=/studio"
-                className="w-full sm:w-auto flex-1 inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs font-bold shadow-md shadow-emerald-700/20 transition-all active:scale-95"
+                className="w-full sm:w-auto flex-1 inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl theme-btn-primary text-xs font-bold transition-all active:scale-95"
               >
                 <LogIn className="w-4 h-4" />
                 <span>লগইন / রেজিস্টার করুন</span>
