@@ -40,6 +40,7 @@ import Link from 'next/link';
 import { toast } from 'react-toastify';
 import { useTheme } from '@/context/ThemeContext';
 import { ConfirmModal } from '@/components/ui/ConfirmModal';
+import { PalettePicker } from '@/components/layout/PalettePicker';
 
 interface IUserGroup {
   userId: string;
@@ -469,7 +470,7 @@ export default function AdminPage() {
         </div>
         <button
           onClick={() => router.push('/auth')}
-          className="w-full py-3 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-600 text-white text-xs font-bold shadow-lg shadow-emerald-700/20 active:scale-95 transition-all"
+          className="w-full py-3 rounded-2xl theme-btn-primary text-xs font-bold active:scale-95 transition-all"
         >
           অ্যাডমিন লগইন পেজে যান
         </button>
@@ -482,7 +483,7 @@ export default function AdminPage() {
       {/* Mobile Sidebar Toggle Button */}
       <div className="md:hidden flex items-center justify-between p-4 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
         <div className="flex items-center gap-2">
-          <Shield className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
+          <Shield className="w-5 h-5 theme-text-accent" />
           <span className="font-black text-sm text-slate-900 dark:text-white">অ্যাডমিন কন্ট্রোল</span>
         </div>
         <button
@@ -510,15 +511,15 @@ export default function AdminPage() {
         <div className="space-y-6">
           {/* Brand & Badge */}
           <div className="flex items-center gap-3 pb-4 border-b border-slate-100 dark:border-slate-800">
-            <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-emerald-600 to-teal-600 flex items-center justify-center text-white shadow-md">
+            <div className="w-10 h-10 rounded-2xl theme-btn-primary flex items-center justify-center shadow-md">
               <Shield className="w-5 h-5" />
             </div>
             <div>
               <h2 className="font-black text-base text-slate-900 dark:text-white leading-tight">
                 অ্যাডমিন প্যানেল
               </h2>
-              <span className="inline-flex items-center gap-1 text-[10px] text-emerald-600 dark:text-emerald-400 font-bold">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="inline-flex items-center gap-1 text-[10px] theme-text-accent font-bold">
+                <span className="w-1.5 h-1.5 rounded-full theme-bg-primary animate-pulse" />
                 লাইভ মোড
               </span>
             </div>
@@ -533,7 +534,7 @@ export default function AdminPage() {
               }}
               className={`w-full flex items-center justify-between px-4 py-3 rounded-2xl text-xs font-bold transition-all ${
                 activeTab === 'overview'
-                  ? 'bg-emerald-600 text-white shadow-md shadow-emerald-600/20'
+                  ? 'theme-btn-primary font-bold shadow-md'
                   : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60'
               }`}
             >
@@ -550,7 +551,7 @@ export default function AdminPage() {
               }}
               className={`w-full flex items-center justify-between px-4 py-3 rounded-2xl text-xs font-bold transition-all ${
                 activeTab === 'moderation'
-                  ? 'bg-emerald-600 text-white shadow-md shadow-emerald-600/20'
+                  ? 'theme-btn-primary font-bold shadow-md'
                   : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60'
               }`}
             >
@@ -576,7 +577,7 @@ export default function AdminPage() {
               }}
               className={`w-full flex items-center justify-between px-4 py-3 rounded-2xl text-xs font-bold transition-all ${
                 activeTab === 'templates'
-                  ? 'bg-emerald-600 text-white shadow-md shadow-emerald-600/20'
+                  ? 'theme-btn-primary font-bold shadow-md'
                   : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60'
               }`}
             >
@@ -602,7 +603,7 @@ export default function AdminPage() {
               }}
               className={`w-full flex items-center justify-between px-4 py-3 rounded-2xl text-xs font-bold transition-all ${
                 activeTab === 'users'
-                  ? 'bg-emerald-600 text-white shadow-md shadow-emerald-600/20'
+                  ? 'theme-btn-primary font-bold shadow-md'
                   : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/60'
               }`}
             >
@@ -626,7 +627,7 @@ export default function AdminPage() {
         {/* Sidebar Footer */}
         <div className="pt-4 border-t border-slate-100 dark:border-slate-800 space-y-3">
           <div className="flex items-center gap-2.5 px-2">
-            <div className="w-8 h-8 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-600 dark:text-emerald-400 font-bold text-xs">
+            <div className="w-8 h-8 rounded-full theme-subtle-bg border theme-border flex items-center justify-center font-bold text-xs">
               🛡️
             </div>
             <div className="flex-1 truncate">
@@ -647,7 +648,7 @@ export default function AdminPage() {
             </Link>
             <Link
               href="/studio"
-              className="flex-1 flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl bg-emerald-600/10 hover:bg-emerald-600/20 text-emerald-600 dark:text-emerald-400 text-[11px] font-bold transition-all"
+              className="flex-1 flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl theme-subtle-bg text-[11px] font-bold transition-all"
             >
               <Layers className="w-3.5 h-3.5" />
               <span>স্টুডিও</span>
@@ -675,8 +676,11 @@ export default function AdminPage() {
             </p>
           </div>
 
-          {/* Top Actions: Theme, Refresh, Profile & Logout */}
+          {/* Top Actions: Palette Picker, Theme Toggle, Refresh, Profile & Logout */}
           <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
+            {/* 10 Theme Palette Picker Dropdown */}
+            <PalettePicker />
+
             {/* Theme Toggle Button */}
             <button
               type="button"
@@ -693,14 +697,14 @@ export default function AdminPage() {
               onClick={handleManualRefresh}
               disabled={loadingData}
               title="ডাটাবেজ রিফ্রেশ করুন"
-              className="p-2.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 hover:border-emerald-500/40 shadow-sm transition-all active:scale-90"
+              className="p-2.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-300 hover:theme-text-accent hover:theme-border shadow-sm transition-all active:scale-90"
             >
-              <RefreshCw className={`w-4 h-4 ${loadingData ? 'animate-spin text-emerald-600' : ''}`} />
+              <RefreshCw className={`w-4 h-4 ${loadingData ? 'animate-spin theme-text-accent' : ''}`} />
             </button>
 
             {/* Admin Profile Pill */}
             <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-2xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs font-bold text-slate-800 dark:text-slate-200">
-              <span className="text-emerald-600 dark:text-emerald-400">🛡️</span>
+              <span className="theme-text-accent">🛡️</span>
               <span className="truncate max-w-[130px]">{user?.name || 'অ্যাডমিনিস্ট্রেটর'}</span>
             </div>
 
@@ -719,7 +723,7 @@ export default function AdminPage() {
 
         {/* Action Alerts */}
         {actionSuccessMsg && (
-          <div className="p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 text-xs flex items-center justify-between animate-in fade-in">
+          <div className="p-4 rounded-2xl theme-subtle-bg border theme-border theme-text-accent text-xs flex items-center justify-between animate-in fade-in">
             <div className="flex items-center gap-2 font-bold">
               <CheckCircle className="w-4 h-4" />
               <span>{actionSuccessMsg}</span>
@@ -750,13 +754,13 @@ export default function AdminPage() {
               {/* Card 1: Users */}
               <div
                 onClick={() => setActiveTab('users')}
-                className="p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-xl hover:border-emerald-500/50 hover:scale-[1.02] active:scale-95 transition-all cursor-pointer group space-y-2 select-none"
+                className="p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-xl hover:theme-border hover:scale-[1.02] active:scale-95 transition-all cursor-pointer group space-y-2 select-none"
               >
-                <div className="flex items-center justify-between text-emerald-600 dark:text-emerald-400">
-                  <span className="text-xs font-bold text-slate-500 dark:text-slate-400 group-hover:text-emerald-600 transition-colors">
+                <div className="flex items-center justify-between theme-text-accent">
+                  <span className="text-xs font-bold text-slate-500 dark:text-slate-400 group-hover:theme-text-accent transition-colors">
                     মোট ব্যবহারকারী
                   </span>
-                  <div className="p-2.5 rounded-2xl bg-emerald-500/10 group-hover:bg-emerald-600 group-hover:text-white transition-all">
+                  <div className="p-2.5 rounded-2xl theme-subtle-bg group-hover:theme-btn-primary transition-all">
                     <Users className="w-5 h-5" />
                   </div>
                 </div>
@@ -765,7 +769,7 @@ export default function AdminPage() {
                 </p>
                 <div className="flex items-center justify-between text-[11px] text-slate-500 pt-2 border-t border-slate-100 dark:border-slate-800">
                   <span>নিবন্ধিত ইউজার</span>
-                  <span className="font-bold text-emerald-600 dark:text-emerald-400 group-hover:translate-x-1 transition-transform">
+                  <span className="font-bold theme-text-accent group-hover:translate-x-1 transition-transform">
                     তালিকা দেখুন →
                   </span>
                 </div>
@@ -777,13 +781,13 @@ export default function AdminPage() {
                   setFilterFlaggedOnly(false);
                   setActiveTab('moderation');
                 }}
-                className="p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-xl hover:border-teal-500/50 hover:scale-[1.02] active:scale-95 transition-all cursor-pointer group space-y-2 select-none"
+                className="p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-xl hover:theme-border hover:scale-[1.02] active:scale-95 transition-all cursor-pointer group space-y-2 select-none"
               >
-                <div className="flex items-center justify-between text-teal-600 dark:text-teal-400">
-                  <span className="text-xs font-bold text-slate-500 dark:text-slate-400 group-hover:text-teal-600 transition-colors">
+                <div className="flex items-center justify-between theme-text-accent">
+                  <span className="text-xs font-bold text-slate-500 dark:text-slate-400 group-hover:theme-text-accent transition-colors">
                     মোট তৈরি পোস্টার
                   </span>
-                  <div className="p-2.5 rounded-2xl bg-teal-500/10 group-hover:bg-teal-600 group-hover:text-white transition-all">
+                  <div className="p-2.5 rounded-2xl theme-subtle-bg group-hover:theme-btn-primary transition-all">
                     <ImageIcon className="w-5 h-5" />
                   </div>
                 </div>
@@ -792,7 +796,7 @@ export default function AdminPage() {
                 </p>
                 <div className="flex items-center justify-between text-[11px] text-slate-500 pt-2 border-t border-slate-100 dark:border-slate-800">
                   <span>সংরক্ষিত পোস্টার</span>
-                  <span className="font-bold text-teal-600 dark:text-teal-400 group-hover:translate-x-1 transition-transform">
+                  <span className="font-bold theme-text-accent group-hover:translate-x-1 transition-transform">
                     মডারেট করুন →
                   </span>
                 </div>
@@ -858,7 +862,7 @@ export default function AdminPage() {
                 </h3>
                 <button
                   onClick={() => setActiveTab('moderation')}
-                  className="text-xs text-emerald-600 dark:text-emerald-400 hover:underline font-bold"
+                  className="text-xs theme-text-accent hover:underline font-bold"
                 >
                   সবগুলো পোস্টার দেখুন →
                 </button>
@@ -900,7 +904,7 @@ export default function AdminPage() {
                               ⚠️ ফ্ল্যাগড
                             </span>
                           ) : (
-                            <span className="px-2 py-0.5 rounded-full text-[10px] bg-emerald-500/10 text-emerald-600 font-bold">
+                            <span className="px-2 py-0.5 rounded-full text-[10px] theme-subtle-bg theme-text-accent font-bold">
                               সফল
                             </span>
                           )}
@@ -944,7 +948,7 @@ export default function AdminPage() {
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   placeholder="ব্যবহারকারীর নাম, প্রার্থীর নাম বা হেডলাইন দিয়ে খুঁজুন..."
-                  className="w-full pl-10 pr-4 py-2 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                  className="w-full pl-10 pr-4 py-2 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white focus:outline-none theme-ring-focus"
                 />
               </div>
 
@@ -995,7 +999,7 @@ export default function AdminPage() {
                       className="w-full flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 sm:p-5 hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors text-left select-none"
                     >
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-emerald-500/20 to-teal-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-600 dark:text-emerald-400 font-black text-sm flex-shrink-0">
+                        <div className="w-10 h-10 rounded-2xl theme-subtle-bg border theme-border flex items-center justify-center font-black text-sm flex-shrink-0">
                           {group.name.charAt(0)}
                         </div>
                         <div className="min-w-0">
@@ -1058,7 +1062,7 @@ export default function AdminPage() {
                                     <h4 className="font-bold text-slate-900 dark:text-white text-xs line-clamp-1">
                                       {poster.formData.candidateName}
                                     </h4>
-                                    <p className="text-[11px] text-emerald-600 dark:text-emerald-400 font-semibold line-clamp-1">
+                                    <p className="text-[11px] theme-text-accent font-semibold line-clamp-1">
                                       {poster.formData.designation} — {poster.formData.organizationOrParty}
                                     </p>
                                   </div>
@@ -1068,7 +1072,7 @@ export default function AdminPage() {
                                       ফ্ল্যাগড
                                     </span>
                                   ) : (
-                                    <span className="px-2 py-0.5 rounded-full text-[10px] bg-emerald-500/10 text-emerald-600 font-bold">
+                                    <span className="px-2 py-0.5 rounded-full text-[10px] theme-subtle-bg theme-text-accent font-bold">
                                       স্বাভাবিক
                                     </span>
                                   )}
@@ -1118,7 +1122,7 @@ export default function AdminPage() {
                                     onClick={() => handleFlagToggle(poster)}
                                     className={`flex-1 py-1.5 px-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1 ${
                                       poster.isFlagged
-                                        ? 'bg-emerald-500/10 text-emerald-600 hover:bg-emerald-500/20'
+                                        ? 'theme-subtle-bg theme-text-accent'
                                         : 'bg-rose-500/10 text-rose-600 hover:bg-rose-500/20'
                                     }`}
                                   >
@@ -1129,7 +1133,7 @@ export default function AdminPage() {
                                   {poster.generatedImageUrl && (
                                     <button
                                       onClick={() => handleDownloadPoster(poster)}
-                                      className="p-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-500 hover:text-emerald-600 hover:bg-emerald-500/10 transition-colors"
+                                      className="p-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-500 hover:theme-text-accent hover:theme-subtle-bg transition-colors"
                                       title="ডাউনলোড"
                                     >
                                       <Download className="w-3.5 h-3.5" />
@@ -1192,7 +1196,7 @@ export default function AdminPage() {
                   });
                   setIsTemplateModalOpen(true);
                 }}
-                className="flex items-center gap-1.5 px-4 py-2 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs font-bold shadow-md shadow-emerald-700/20 active:scale-95 transition-all"
+                className="flex items-center gap-1.5 px-4 py-2 rounded-2xl theme-btn-primary text-xs font-bold active:scale-95 transition-all"
               >
                 <Plus className="w-4 h-4" />
                 <span>নতুন টেমপ্লেট যোগ করুন</span>
@@ -1224,7 +1228,7 @@ export default function AdminPage() {
                       {tpl.banglaTitle}
                     </h4>
                     <p className="text-[11px] text-slate-500">{tpl.title}</p>
-                    <p className="text-[10px] text-emerald-600 dark:text-emerald-400 font-semibold">
+                    <p className="text-[10px] theme-text-accent font-semibold">
                       উপলক্ষ: {tpl.occasionType} | সর্বোচ্চ নেতা: {tpl.layoutConfig?.maxTopLeaders ?? 2} জন
                     </p>
                   </div>
@@ -1253,7 +1257,7 @@ export default function AdminPage() {
                         });
                         setIsTemplateModalOpen(true);
                       }}
-                      className="text-xs text-emerald-600 dark:text-emerald-400 font-bold hover:underline"
+                      className="text-xs theme-text-accent font-bold hover:underline"
                     >
                       এডিট করুন
                     </button>
@@ -1293,7 +1297,7 @@ export default function AdminPage() {
                   {usersList.map((u) => (
                     <tr key={u.id || u._id} className="hover:bg-slate-50 dark:hover:bg-slate-800/50">
                       <td className="py-3 font-bold text-slate-900 dark:text-white flex items-center gap-2.5">
-                        <div className="w-8 h-8 rounded-2xl bg-emerald-500/10 text-emerald-600 flex items-center justify-center font-bold">
+                        <div className="w-8 h-8 rounded-2xl theme-subtle-bg theme-text-accent flex items-center justify-center font-bold">
                           {u.name.charAt(0)}
                         </div>
                         <span>{u.name}</span>
@@ -1330,7 +1334,7 @@ export default function AdminPage() {
           <div className="w-full max-w-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto">
             <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-800">
               <h3 className="font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                <FileCheck className="w-4 h-4 text-emerald-500" />
+                <FileCheck className="w-4 h-4 theme-text-accent" />
                 <span>পোস্টার মডারেশন ও প্রিভিউ</span>
               </h3>
               <button
@@ -1398,7 +1402,7 @@ export default function AdminPage() {
                       onClick={() => handleFlagToggle(selectedPoster)}
                       className={`flex-1 py-2.5 rounded-xl font-bold text-xs transition-all flex items-center justify-center gap-1.5 ${
                         selectedPoster.isFlagged
-                          ? 'bg-emerald-600 hover:bg-emerald-500 text-white'
+                          ? 'theme-btn-primary'
                           : 'bg-rose-600 hover:bg-rose-500 text-white'
                       }`}
                     >
@@ -1410,7 +1414,7 @@ export default function AdminPage() {
                       <button
                         type="button"
                         onClick={() => handleDownloadPoster(selectedPoster)}
-                        className="px-3 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-emerald-500/10 hover:text-emerald-600 text-slate-700 dark:text-slate-300 font-bold"
+                        className="px-3 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:theme-subtle-bg hover:theme-text-accent text-slate-700 dark:text-slate-300 font-bold"
                         title="ডাউনলোড"
                       >
                         <Download className="w-4 h-4" />
@@ -1439,7 +1443,7 @@ export default function AdminPage() {
           <div className="w-full max-w-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto font-bengali">
             <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-800">
               <h3 className="font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                <LayoutTemplate className="w-4 h-4 text-emerald-500" />
+                <LayoutTemplate className="w-4 h-4 theme-text-accent" />
                 <span>{editingTemplateId ? 'টেমপ্লেট সম্পাদন করুন' : 'নতুন টেমপ্লেট তৈরি করুন'}</span>
               </h3>
               <button
@@ -1462,7 +1466,7 @@ export default function AdminPage() {
                     value={templateForm.banglaTitle}
                     onChange={(e) => setTemplateForm({ ...templateForm, banglaTitle: e.target.value })}
                     placeholder="যেমন: মহান স্বাধীনতা দিবস ও কর্মী সমাবেশ"
-                    className="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 focus:ring-2 focus:ring-emerald-500"
+                    className="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 focus:outline-none theme-ring-focus"
                   />
                 </div>
 
@@ -1476,7 +1480,7 @@ export default function AdminPage() {
                     value={templateForm.title}
                     onChange={(e) => setTemplateForm({ ...templateForm, title: e.target.value })}
                     placeholder="e.g., Independence Day Tribute Banner"
-                    className="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 focus:ring-2 focus:ring-emerald-500"
+                    className="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 focus:outline-none theme-ring-focus"
                   />
                 </div>
               </div>
@@ -1489,7 +1493,7 @@ export default function AdminPage() {
                   <select
                     value={templateForm.occasionType}
                     onChange={(e) => setTemplateForm({ ...templateForm, occasionType: e.target.value })}
-                    className="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 focus:ring-2 focus:ring-emerald-500"
+                    className="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 focus:outline-none theme-ring-focus"
                   >
                     <option value="shuvechcha">শুভেচ্ছা ও সম্মেলন</option>
                     <option value="election_campaign">নির্বাচনী প্রচারণা (মেয়র/চেয়ারম্যান/এমপি)</option>
@@ -1511,7 +1515,7 @@ export default function AdminPage() {
                     max="6"
                     value={templateForm.maxTopLeaders}
                     onChange={(e) => setTemplateForm({ ...templateForm, maxTopLeaders: Number(e.target.value) })}
-                    className="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 focus:ring-2 focus:ring-emerald-500"
+                    className="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 focus:outline-none theme-ring-focus"
                   />
                 </div>
               </div>
@@ -1525,7 +1529,7 @@ export default function AdminPage() {
                   value={templateForm.defaultHeadline}
                   onChange={(e) => setTemplateForm({ ...templateForm, defaultHeadline: e.target.value })}
                   placeholder="যেমন: বিশাল নির্বাচনী জনসভা সফল হোক"
-                  className="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700"
+                  className="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 focus:outline-none theme-ring-focus"
                 />
               </div>
 
@@ -1538,7 +1542,7 @@ export default function AdminPage() {
                   value={templateForm.defaultSlogan}
                   onChange={(e) => setTemplateForm({ ...templateForm, defaultSlogan: e.target.value })}
                   placeholder="যেমন: জনগণের অধিকার আদায়ে আপসহীন সংগ্রাম"
-                  className="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700"
+                  className="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 focus:outline-none theme-ring-focus"
                 />
               </div>
 
@@ -1606,7 +1610,7 @@ export default function AdminPage() {
                 </button>
                 <button
                   type="submit"
-                  className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold shadow-md active:scale-95 transition-all"
+                  className="px-6 py-2.5 rounded-xl theme-btn-primary font-bold active:scale-95 transition-all"
                 >
                   {editingTemplateId ? 'আপডেট করুন' : 'টেমপ্লেট তৈরি করুন'}
                 </button>
