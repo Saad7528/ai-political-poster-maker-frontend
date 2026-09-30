@@ -10,6 +10,8 @@ import { authClient } from '@/lib/auth-client';
 import { LogIn, UserPlus, Sparkles, Loader2, AlertCircle, Shield, Eye, EyeOff, ArrowLeft, Sun, Moon } from 'lucide-react';
 import { toast } from 'react-toastify';
 
+import { PalettePicker } from '@/components/layout/PalettePicker';
+
 export default function AuthPage() {
   const router = useRouter();
   const { login } = useAuth();
@@ -111,11 +113,39 @@ export default function AuthPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex flex-col justify-center items-center px-4 py-3 sm:py-6 relative font-bengali">
-      {/* Brand Logo & Name Header (Clickable to Home / Studio) */}
-      <div className="text-center mb-3 sm:mb-4 select-none">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex flex-col justify-center items-center px-4 py-6 relative font-bengali">
+      {/* Top Floating Controls: Back to Home + Palette Picker + Theme Toggle */}
+      <div className="absolute top-4 left-4 right-4 flex items-center justify-between max-w-5xl mx-auto">
+        <Link
+          href="/"
+          className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 text-xs font-bold transition-all shadow-sm active:scale-95"
+        >
+          <ArrowLeft className="w-3.5 h-3.5" />
+          <span>মূল পাতা</span>
+        </Link>
+
+        <div className="flex items-center gap-2">
+          <PalettePicker />
+          <button
+            type="button"
+            onClick={toggleTheme}
+            aria-label="Toggle Dark/Light Mode"
+            title={theme === 'dark' ? 'লাইট মোডে পরিবর্তন করুন' : 'ডার্ক মোডে পরিবর্তন করুন'}
+            className="p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-amber-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all active:scale-95 shadow-sm"
+          >
+            {theme === 'dark' ? (
+              <Sun className="w-4 h-4 text-amber-400 animate-in spin-in-180" />
+            ) : (
+              <Moon className="w-4 h-4 text-slate-700 animate-in spin-in-180" />
+            )}
+          </button>
+        </div>
+      </div>
+
+      {/* Brand Logo & Name Header */}
+      <div className="text-center mb-3 sm:mb-4 select-none mt-12 sm:mt-0">
         <Link href="/" className="inline-flex flex-col items-center group">
-          <div className="w-11 h-11 sm:w-13 sm:h-13 rounded-2xl overflow-hidden shadow-lg border-2 border-emerald-500/30 group-hover:scale-105 transition-transform mb-1.5">
+          <div className="w-11 h-11 sm:w-13 sm:h-13 rounded-2xl overflow-hidden shadow-lg border-2 theme-border group-hover:scale-105 transition-transform mb-1.5">
             <img
               src="/logo.png"
               alt="AI Political Poster Maker"
@@ -123,7 +153,7 @@ export default function AuthPage() {
             />
           </div>
           <span className="font-black text-lg sm:text-xl text-slate-900 dark:text-white tracking-tight leading-none">
-            পোস্টার<span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-amber-500 dark:from-emerald-400 dark:to-amber-300">মেকার</span>
+            পোস্টার<span className="theme-text-gradient">মেকার</span>
           </span>
           <p className="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5">
             ডিজিটাল রাজনৈতিক ও নির্বাচনী পোস্টার প্ল্যাটফর্ম
@@ -202,7 +232,7 @@ export default function AuthPage() {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="যেমন: মো: রফিকুল ইসলাম"
-                className="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white text-xs focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white text-xs focus:outline-none theme-ring-focus"
               />
             </div>
           )}
@@ -217,7 +247,7 @@ export default function AuthPage() {
               value={emailOrPhone}
               onChange={(e) => setEmailOrPhone(e.target.value)}
               placeholder="example@gmail.com অথবা 017XXXXXXXX"
-              className="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white text-xs focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              className="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white text-xs focus:outline-none theme-ring-focus"
             />
           </div>
 
@@ -232,7 +262,7 @@ export default function AuthPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className="w-full pl-3 pr-9 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white text-xs focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="w-full pl-3 pr-9 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white text-xs focus:outline-none theme-ring-focus"
               />
               <button
                 type="button"
@@ -248,7 +278,7 @@ export default function AuthPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-xs shadow-md shadow-emerald-700/20 transition-all flex items-center justify-center gap-2 active:scale-95 disabled:opacity-50 mt-1"
+            className="w-full py-2.5 rounded-xl theme-btn-primary font-bold text-xs transition-all flex items-center justify-center gap-2 active:scale-95 disabled:opacity-50 mt-1"
           >
             {loading ? (
               <Loader2 className="w-3.5 h-3.5 animate-spin" />
@@ -269,7 +299,7 @@ export default function AuthPage() {
               setIsRegister(!isRegister);
               setErrorMsg(null);
             }}
-            className="text-[11px] text-emerald-600 dark:text-amber-400 hover:underline font-bold"
+            className="text-[11px] theme-text-accent hover:underline font-bold"
           >
             {isRegister
               ? 'ইতিমধ্যে অ্যাকাউন্ট আছে? সাইন ইন করুন'
