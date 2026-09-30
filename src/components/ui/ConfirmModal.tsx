@@ -118,7 +118,7 @@ export function ConfirmModal({
             className={`px-5 py-2 text-sm font-semibold rounded-xl flex items-center gap-2 shadow-lg transition disabled:opacity-50 ${
               isDestructive
                 ? 'bg-gradient-to-r from-rose-600 to-red-600 hover:from-rose-500 hover:to-red-500 text-white shadow-rose-900/30'
-                : 'bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white shadow-emerald-900/30'
+                : 'theme-btn-primary'
             }`}
           >
             {isLoading && <Loader2 className="w-4 h-4 animate-spin" />}
