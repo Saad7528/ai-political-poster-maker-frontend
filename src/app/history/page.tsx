@@ -124,7 +124,7 @@ export default function HistoryPage() {
 
         <Link
           href="/studio"
-          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-gradient-to-r from-emerald-600 via-rose-600 to-amber-500 text-white text-xs font-bold shadow-md hover:brightness-110 active:scale-95 transition-all"
+          className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-2xl bg-gradient-to-r from-emerald-600 via-rose-600 to-amber-500 text-white text-xs font-bold shadow-md hover:brightness-110 active:scale-95 transition-all"
         >
           <Sparkles className="w-4 h-4" />
           <span>নতুন পোস্টার তৈরি করুন</span>

@@ -44,6 +44,29 @@ export const PosterCanvas = forwardRef<PosterCanvasHandle, PosterCanvasProps>(({
   const posterRef = useRef<HTMLDivElement>(null);
   const [viewScale, setViewScale] = useState<number>(0.72);
 
+  // Auto-fit scale based on device viewport width
+  useEffect(() => {
+    const updateScaleForViewport = () => {
+      if (typeof window === 'undefined') return;
+      const width = window.innerWidth;
+      if (width < 380) {
+        setViewScale(0.48);
+      } else if (width < 480) {
+        setViewScale(0.54);
+      } else if (width < 640) {
+        setViewScale(0.60);
+      } else if (width < 1024) {
+        setViewScale(0.68);
+      } else {
+        setViewScale(0.72);
+      }
+    };
+
+    updateScaleForViewport();
+    window.addEventListener('resize', updateScaleForViewport);
+    return () => window.removeEventListener('resize', updateScaleForViewport);
+  }, []);
+
   const [editingField, setEditingField] = useState<string | null>(null);
 
   const [isDraggingCandidate, setIsDraggingCandidate] = useState(false);

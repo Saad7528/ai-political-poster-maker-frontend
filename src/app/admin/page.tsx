@@ -493,10 +493,18 @@ export default function AdminPage() {
         </button>
       </div>
 
+      {/* Mobile Sidebar Overlay Backdrop */}
+      {isMobileSidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-30 md:hidden animate-in fade-in"
+          onClick={() => setIsMobileSidebarOpen(false)}
+        />
+      )}
+
       {/* LEFT SIDEBAR */}
       <aside
         className={`fixed md:sticky top-0 z-40 h-screen w-72 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 flex flex-col justify-between p-5 overflow-y-auto transition-transform duration-300 ${
-          isMobileSidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
+          isMobileSidebarOpen ? 'translate-x-0 shadow-2xl' : '-translate-x-full md:translate-x-0'
         }`}
       >
         <div className="space-y-6">
@@ -940,12 +948,12 @@ export default function AdminPage() {
                 />
               </div>
 
-              <div className="flex items-center gap-2 self-end sm:self-auto">
+              <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
                 <button
                   onClick={() => setFilterFlaggedOnly(!filterFlaggedOnly)}
-                  className={`flex items-center gap-1.5 px-3.5 py-2 rounded-2xl text-xs font-bold transition-all border ${
+                  className={`flex-1 sm:flex-none flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-2xl text-xs font-bold transition-all border whitespace-nowrap active:scale-95 ${
                     filterFlaggedOnly
-                      ? 'bg-rose-500 text-white border-rose-500'
+                      ? 'bg-rose-500 text-white border-rose-500 shadow-sm'
                       : 'bg-slate-100 dark:bg-slate-800 border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400'
                   }`}
                 >
@@ -955,14 +963,14 @@ export default function AdminPage() {
 
                 <button
                   onClick={expandAllAccordions}
-                  className="px-3 py-2 rounded-2xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-bold hover:bg-slate-200 transition-colors"
+                  className="flex-1 sm:flex-none px-3 py-2 rounded-2xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-bold hover:bg-slate-200 transition-colors whitespace-nowrap active:scale-95"
                 >
                   সব খুলুন
                 </button>
 
                 <button
                   onClick={collapseAllAccordions}
-                  className="px-3 py-2 rounded-2xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-bold hover:bg-slate-200 transition-colors"
+                  className="flex-1 sm:flex-none px-3 py-2 rounded-2xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-bold hover:bg-slate-200 transition-colors whitespace-nowrap active:scale-95"
                 >
                   সব বন্ধ
                 </button>
@@ -984,15 +992,15 @@ export default function AdminPage() {
                     <button
                       type="button"
                       onClick={() => toggleUserAccordion(group.userId)}
-                      className="w-full flex items-center justify-between p-4 sm:p-5 hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors text-left select-none"
+                      className="w-full flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 sm:p-5 hover:bg-slate-50 dark:hover:bg-slate-800/40 transition-colors text-left select-none"
                     >
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-emerald-500/20 to-teal-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-600 dark:text-emerald-400 font-black text-sm">
+                        <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-emerald-500/20 to-teal-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-600 dark:text-emerald-400 font-black text-sm flex-shrink-0">
                           {group.name.charAt(0)}
                         </div>
-                        <div>
-                          <div className="flex items-center gap-2">
-                            <h3 className="text-sm font-black text-slate-900 dark:text-white">
+                        <div className="min-w-0">
+                          <div className="flex items-center gap-2 flex-wrap">
+                            <h3 className="text-sm font-black text-slate-900 dark:text-white truncate">
                               {group.name}
                             </h3>
                             <span
@@ -1005,18 +1013,18 @@ export default function AdminPage() {
                               {group.role === 'admin' ? '🛡️ অ্যাডমিন' : '👤 ইউজার'}
                             </span>
                           </div>
-                          <p className="text-[11px] text-slate-500">{group.emailOrPhone}</p>
+                          <p className="text-[11px] text-slate-500 truncate">{group.emailOrPhone}</p>
                         </div>
                       </div>
 
-                      <div className="flex items-center gap-3">
+                      <div className="flex items-center justify-between sm:justify-end gap-2 sm:gap-3 w-full sm:w-auto pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-100 dark:border-slate-800">
                         {flaggedInGroup > 0 && (
-                          <span className="px-2.5 py-1 rounded-full text-[10px] bg-rose-500 text-white font-bold animate-pulse">
+                          <span className="px-2.5 py-1 rounded-full text-[10px] bg-rose-500 text-white font-bold animate-pulse whitespace-nowrap">
                             ⚠️ {flaggedInGroup}টি ফ্ল্যাগড
                           </span>
                         )}
 
-                        <span className="px-3 py-1 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-bold">
+                        <span className="px-3 py-1 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-bold whitespace-nowrap">
                           {group.posters.length}টি পোস্টার
                         </span>
 

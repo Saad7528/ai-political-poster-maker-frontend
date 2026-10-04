@@ -2,15 +2,18 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { useAuth } from '@/context/AuthContext';
+import { useTheme } from '@/context/ThemeContext';
 import { api } from '@/lib/api';
 import { authClient } from '@/lib/auth-client';
-import { LogIn, UserPlus, Sparkles, Loader2, AlertCircle, Shield, Eye, EyeOff } from 'lucide-react';
+import { LogIn, UserPlus, Sparkles, Loader2, AlertCircle, Shield, Eye, EyeOff, ArrowLeft, Sun, Moon } from 'lucide-react';
 import { toast } from 'react-toastify';
 
 export default function AuthPage() {
   const router = useRouter();
   const { login } = useAuth();
+  const { theme, toggleTheme } = useTheme();
 
   const [isRegister, setIsRegister] = useState(false);
   const [name, setName] = useState('');
@@ -46,7 +49,9 @@ export default function AuthPage() {
     try {
       if (isRegister) {
         if (!name.trim()) {
-          setErrorMsg('অনুগ্রহ করে আপনার পুরো নাম প্রদান করুন।');
+          const msg = 'অনুগ্রহ করে আপনার পুরো নাম প্রদান করুন।';
+          setErrorMsg(msg);
+          toast.warning(msg);
           setLoading(false);
           return;
         }
@@ -106,24 +111,41 @@ export default function AuthPage() {
   };
 
   return (
-    <div className="max-w-md mx-auto px-4 py-12 font-bengali">
-      <div className="p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl dark:shadow-2xl space-y-6">
-        {/* Header Branding */}
-        <div className="text-center space-y-2">
-          <div className="inline-flex p-3 rounded-2xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 shadow-sm mb-1">
-            <Sparkles className="w-6 h-6 animate-pulse" />
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex flex-col justify-center items-center px-4 py-3 sm:py-6 relative font-bengali">
+      {/* Brand Logo & Name Header (Clickable to Home / Studio) */}
+      <div className="text-center mb-3 sm:mb-4 select-none">
+        <Link href="/" className="inline-flex flex-col items-center group">
+          <div className="w-11 h-11 sm:w-13 sm:h-13 rounded-2xl overflow-hidden shadow-lg border-2 border-emerald-500/30 group-hover:scale-105 transition-transform mb-1.5">
+            <img
+              src="/logo.png"
+              alt="AI Political Poster Maker"
+              className="w-full h-full object-cover"
+            />
           </div>
-          <h1 className="text-2xl font-black text-slate-900 dark:text-white">
+          <span className="font-black text-lg sm:text-xl text-slate-900 dark:text-white tracking-tight leading-none">
+            পোস্টার<span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-amber-500 dark:from-emerald-400 dark:to-amber-300">মেকার</span>
+          </span>
+          <p className="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5">
+            ডিজিটাল রাজনৈতিক ও নির্বাচনী পোস্টার প্ল্যাটফর্ম
+          </p>
+        </Link>
+      </div>
+
+      {/* Main Centered Form Card */}
+      <div className="max-w-md w-full p-4 sm:p-6 rounded-2xl sm:rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-lg dark:shadow-2xl space-y-3 sm:space-y-4">
+        {/* Card Header Title */}
+        <div className="text-center space-y-0.5">
+          <h1 className="text-base sm:text-xl font-black text-slate-900 dark:text-white">
             {isRegister ? 'নতুন অ্যাকাউন্ট তৈরি করুন' : 'অ্যাকাউন্টে লগইন করুন'}
           </h1>
-          <p className="text-xs text-slate-600 dark:text-slate-400">
-            ডিজিটাল নির্বাচনী ও রাজনৈতিক পোস্টার মেকার প্ল্যাটফর্ম
+          <p className="text-[11px] text-slate-500 dark:text-slate-400">
+            {isRegister ? 'পোস্টার তৈরি ও সংরক্ষণের জন্য সাইন আপ করুন' : 'আপনার সংরক্ষিত পোস্টার দেখতে সাইন ইন করুন'}
           </p>
         </div>
 
         {/* Error Alert */}
         {errorMsg && (
-          <div className="p-3.5 rounded-2xl bg-rose-500/10 border border-rose-500/30 text-rose-600 dark:text-rose-400 text-xs flex items-center gap-2">
+          <div className="p-2.5 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-600 dark:text-rose-400 text-xs flex items-center gap-2 animate-in fade-in">
             <AlertCircle className="w-4 h-4 flex-shrink-0" />
             <span>{errorMsg}</span>
           </div>
@@ -134,12 +156,12 @@ export default function AuthPage() {
           type="button"
           onClick={handleGoogleSignIn}
           disabled={googleLoading}
-          className="w-full py-3 px-4 rounded-2xl bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700/80 border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-white font-bold text-xs shadow-sm hover:shadow transition-all flex items-center justify-center gap-3 active:scale-95 select-none"
+          className="w-full py-2.5 px-3 rounded-xl bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700/80 border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-white font-bold text-xs shadow-sm hover:shadow transition-all flex items-center justify-center gap-2.5 active:scale-95 select-none"
         >
           {googleLoading ? (
-            <Loader2 className="w-4 h-4 animate-spin text-slate-600 dark:text-slate-300" />
+            <Loader2 className="w-3.5 h-3.5 animate-spin text-slate-600 dark:text-slate-300" />
           ) : (
-            <svg className="w-4 h-4" viewBox="0 0 24 24">
+            <svg className="w-3.5 h-3.5 flex-shrink-0" viewBox="0 0 24 24">
               <path
                 fill="#4285F4"
                 d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
@@ -158,22 +180,20 @@ export default function AuthPage() {
               />
             </svg>
           )}
-          <span>{googleLoading ? 'গুগল কানেক্ট হচ্ছে...' : 'Google / Gmail দিয়ে সাইন ইন করুন'}</span>
+          <span>গুগল অ্যাকাউন্ট দিয়ে সরাসরি প্রবেশ</span>
         </button>
 
-        {/* Divider */}
-        <div className="relative flex items-center justify-center">
-          <div className="w-full border-t border-slate-200 dark:border-slate-800" />
-          <span className="absolute px-3 bg-white dark:bg-slate-900 text-[11px] font-bold text-slate-400">
-            অথবা ইমেইল/পাসওয়ার্ড দিয়ে
-          </span>
+        <div className="relative flex py-0.5 items-center">
+          <div className="flex-grow border-t border-slate-200 dark:border-slate-800" />
+          <span className="flex-shrink mx-2.5 text-[10px] text-slate-400 font-semibold">অথবা</span>
+          <div className="flex-grow border-t border-slate-200 dark:border-slate-800" />
         </div>
 
-        {/* Email/Password Form */}
-        <form onSubmit={handleSubmit} className="space-y-3.5">
+        {/* Credentials Form */}
+        <form onSubmit={handleSubmit} className="space-y-2.5 sm:space-y-3">
           {isRegister && (
             <div>
-              <label className="text-xs font-bold text-slate-700 dark:text-slate-300 block mb-1">
+              <label className="text-[11px] font-bold text-slate-700 dark:text-slate-300 block mb-0.5">
                 আপনার পুরো নাম *
               </label>
               <input
@@ -181,28 +201,28 @@ export default function AuthPage() {
                 required
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                placeholder="যেমন: আলহাজ্ব মো: রফিকুল ইসলাম"
-                className="w-full px-4 py-2.5 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white text-xs focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                placeholder="যেমন: মো: রফিকুল ইসলাম"
+                className="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white text-xs focus:outline-none focus:ring-2 focus:ring-emerald-500"
               />
             </div>
           )}
 
           <div>
-            <label className="text-xs font-bold text-slate-700 dark:text-slate-300 block mb-1">
-              ইমেইল বা মোবাইল নম্বর *
+            <label className="text-[11px] font-bold text-slate-700 dark:text-slate-300 block mb-0.5">
+              ইমেইল অ্যাড্রেস বা মোবাইল নম্বর *
             </label>
             <input
               type="text"
               required
               value={emailOrPhone}
               onChange={(e) => setEmailOrPhone(e.target.value)}
-              placeholder="user@example.com বা 017XXXXXXXX"
-              className="w-full px-4 py-2.5 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white text-xs focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              placeholder="example@gmail.com অথবা 017XXXXXXXX"
+              className="w-full px-3 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white text-xs focus:outline-none focus:ring-2 focus:ring-emerald-500"
             />
           </div>
 
           <div>
-            <label className="text-xs font-bold text-slate-700 dark:text-slate-300 block mb-1">
+            <label className="text-[11px] font-bold text-slate-700 dark:text-slate-300 block mb-0.5">
               পাসওয়ার্ড *
             </label>
             <div className="relative">
@@ -212,15 +232,15 @@ export default function AuthPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className="w-full pl-4 pr-11 py-2.5 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white text-xs focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="w-full pl-3 pr-9 py-2 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white text-xs focus:outline-none focus:ring-2 focus:ring-emerald-500"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
                 aria-label={showPassword ? 'পাসওয়ার্ড লুকান' : 'পাসওয়ার্ড দেখুন'}
-                className="absolute right-3 top-1/2 -translate-y-1/2 p-1 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors"
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 p-1 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 transition-colors"
               >
-                {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                {showPassword ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
               </button>
             </div>
           </div>
@@ -228,28 +248,28 @@ export default function AuthPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-xs shadow-md shadow-emerald-700/20 transition-all flex items-center justify-center gap-2 active:scale-95"
+            className="w-full py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-xs shadow-md shadow-emerald-700/20 transition-all flex items-center justify-center gap-2 active:scale-95 disabled:opacity-50 mt-1"
           >
             {loading ? (
-              <Loader2 className="w-4 h-4 animate-spin" />
+              <Loader2 className="w-3.5 h-3.5 animate-spin" />
             ) : isRegister ? (
-              <UserPlus className="w-4 h-4" />
+              <UserPlus className="w-3.5 h-3.5" />
             ) : (
-              <LogIn className="w-4 h-4" />
+              <LogIn className="w-3.5 h-3.5" />
             )}
             <span>{isRegister ? 'অ্যাকাউন্ট তৈরি নিশ্চিত করুন' : 'সাইন ইন করুন'}</span>
           </button>
         </form>
 
         {/* Toggle Sign in / Sign Up */}
-        <div className="text-center pt-1">
+        <div className="text-center pt-0.5">
           <button
             type="button"
             onClick={() => {
               setIsRegister(!isRegister);
               setErrorMsg(null);
             }}
-            className="text-xs text-emerald-600 dark:text-amber-400 hover:underline font-bold"
+            className="text-[11px] text-emerald-600 dark:text-amber-400 hover:underline font-bold"
           >
             {isRegister
               ? 'ইতিমধ্যে অ্যাকাউন্ট আছে? সাইন ইন করুন'
@@ -258,8 +278,8 @@ export default function AuthPage() {
         </div>
 
         {/* Quick Admin Login for Platform Testing */}
-        <div className="pt-3 border-t border-slate-200 dark:border-slate-800 space-y-2">
-          <p className="text-[11px] text-center text-slate-400 font-semibold">
+        <div className="pt-2 border-t border-slate-200 dark:border-slate-800 space-y-1">
+          <p className="text-[10px] text-center text-slate-400 font-semibold">
             অ্যাডমিন ড্যাশবোর্ড টেস্ট করার জন্য
           </p>
           <button
@@ -275,10 +295,10 @@ export default function AuthPage() {
               }
               setLoading(false);
             }}
-            className="w-full py-2.5 px-4 rounded-2xl bg-amber-500/10 hover:bg-amber-500/20 text-amber-700 dark:text-amber-400 text-xs font-bold border border-amber-500/30 transition-all flex items-center justify-center gap-2 shadow-sm active:scale-95"
+            className="w-full py-2 px-3 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 text-amber-700 dark:text-amber-400 text-[11px] font-bold border border-amber-500/30 transition-all flex items-center justify-center gap-1.5 shadow-sm active:scale-95"
           >
-            <Shield className="w-4 h-4 text-amber-500" />
-            <span>🛡️ অ্যাডমিন লগইন (এক ক্লিকে)</span>
+            <Shield className="w-3.5 h-3.5 text-amber-500" />
+            <span>🛡️ অ্যাডমিন টেস্ট লগইন (১-ক্লিক)</span>
           </button>
         </div>
       </div>

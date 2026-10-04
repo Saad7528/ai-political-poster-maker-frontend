@@ -43,75 +43,75 @@ export default function HomePage() {
   return (
     <div className="space-y-16 py-8">
       {/* Hero Section */}
-      <section className="relative overflow-hidden pt-8 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center">
-        <h1 className="text-3xl sm:text-6xl font-black text-slate-900 dark:text-white tracking-tight leading-tight max-w-4xl mx-auto font-bengali">
-          মুহূর্তেই তৈরি করুন <br />
+      <section className="relative overflow-hidden pt-4 sm:pt-8 pb-12 sm:pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center">
+        <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 dark:text-white tracking-tight leading-tight max-w-4xl mx-auto font-bengali">
+          মুহূর্তেই তৈরি করুন <br className="hidden sm:block" />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-500 dark:from-emerald-400 dark:via-teal-300 dark:to-emerald-300">
             খাঁটি বাংলাদেশি রাজনৈতিক পোস্টার
           </span>
         </h1>
 
-        <p className="mt-5 text-sm sm:text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed font-bengali">
+        <p className="mt-4 sm:mt-5 text-xs sm:text-base md:text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed font-bengali px-2">
           নির্বাচনী প্রচারণা, জাতীয় দিবস কিংবা ঈদ শুভেচ্ছা—প্রার্থীর তথ্য ও ছবি দিয়ে এক ক্লিকেই তৈরি করুন ৩০০ DPI হাই-রেজুলেশন প্রিন্ট-রেডি পোস্টার।
         </p>
 
-        <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+        <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
           <Link
             href="/studio"
-            className="w-full sm:w-auto flex items-center justify-center gap-2.5 px-8 py-4 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-black text-base shadow-xl shadow-emerald-600/20 transition-all active:scale-95 font-bengali"
+            className="w-full sm:w-auto flex items-center justify-center gap-2.5 px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-black text-sm sm:text-base shadow-xl shadow-emerald-600/20 transition-all active:scale-95 font-bengali"
           >
-            <Sparkles className="w-5 h-5 fill-current" />
+            <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 fill-current" />
             <span>পোস্টার স্টুডিওতে ডিজাইন শুরু করুন</span>
           </Link>
 
           <Link
             href="/templates"
-            className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-4 rounded-2xl bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700 font-bold text-base transition-all font-bengali shadow-sm"
+            className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700 font-bold text-sm sm:text-base transition-all font-bengali shadow-sm"
           >
-            <Layers className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
+            <Layers className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600 dark:text-emerald-400" />
             <span>টেমপ্লেট গ্যালারি দেখুন</span>
           </Link>
         </div>
 
         {/* Feature Badges */}
-        <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto text-left font-bengali">
-          <div className="p-4 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 shadow-sm flex items-center gap-3">
-            <div className="p-2.5 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
-              <CheckCircle className="w-5 h-5" />
+        <div className="mt-10 sm:mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 max-w-4xl mx-auto text-left font-bengali">
+          <div className="p-3.5 sm:p-4 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 shadow-sm flex items-center gap-3">
+            <div className="p-2 sm:p-2.5 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex-shrink-0">
+              <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5" />
             </div>
             <div>
               <h4 className="text-xs font-bold text-slate-900 dark:text-white">নির্ভুল বাংলা বানান</h4>
-              <p className="text-[11px] text-slate-500 dark:text-slate-400">১০০% স্পষ্ট বাংলা ফন্ট</p>
+              <p className="text-[10px] sm:text-[11px] text-slate-500 dark:text-slate-400">১০০% স্পষ্ট বাংলা ফন্ট</p>
             </div>
           </div>
 
-          <div className="p-4 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 shadow-sm flex items-center gap-3">
-            <div className="p-2.5 rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400">
-              <Printer className="w-5 h-5" />
+          <div className="p-3.5 sm:p-4 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 shadow-sm flex items-center gap-3">
+            <div className="p-2 sm:p-2.5 rounded-xl bg-amber-500/10 text-amber-600 dark:text-amber-400 flex-shrink-0">
+              <Printer className="w-4 h-4 sm:w-5 sm:h-5" />
             </div>
             <div>
               <h4 className="text-xs font-bold text-slate-900 dark:text-white">৩০০ DPI প্রিন্ট ফাইল</h4>
-              <p className="text-[11px] text-slate-500 dark:text-slate-400">HD PNG ও PDF এক্সপোর্ট</p>
+              <p className="text-[10px] sm:text-[11px] text-slate-500 dark:text-slate-400">HD PNG ও PDF এক্সপোর্ট</p>
             </div>
           </div>
 
-          <div className="p-4 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 shadow-sm flex items-center gap-3">
-            <div className="p-2.5 rounded-xl bg-rose-500/10 text-rose-600 dark:text-rose-400">
-              <Zap className="w-5 h-5" />
+          <div className="p-3.5 sm:p-4 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 shadow-sm flex items-center gap-3">
+            <div className="p-2 sm:p-2.5 rounded-xl bg-rose-500/10 text-rose-600 dark:text-rose-400 flex-shrink-0">
+              <Zap className="w-4 h-4 sm:w-5 sm:h-5" />
             </div>
             <div>
               <h4 className="text-xs font-bold text-slate-900 dark:text-white">জেমিনি এআই স্লোগান</h4>
-              <p className="text-[11px] text-slate-500 dark:text-slate-400">স্বয়ংক্রিয় কপিরাইটিং</p>
+              <p className="text-[10px] sm:text-[11px] text-slate-500 dark:text-slate-400">স্বয়ংক্রিয় কপিরাইটিং</p>
             </div>
           </div>
 
-          <div className="p-4 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 shadow-sm flex items-center gap-3">
-            <div className="p-2.5 rounded-xl bg-blue-500/10 text-blue-600 dark:text-blue-400">
-              <ShieldCheck className="w-5 h-5" />
+          <div className="p-3.5 sm:p-4 rounded-2xl bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 shadow-sm flex items-center gap-3">
+            <div className="p-2 sm:p-2.5 rounded-xl bg-blue-500/10 text-blue-600 dark:text-blue-400 flex-shrink-0">
+              <ShieldCheck className="w-4 h-4 sm:w-5 sm:h-5" />
             </div>
             <div>
               <h4 className="text-xs font-bold text-slate-900 dark:text-white">প্রকৃত নেতার ছবি</h4>
-              <p className="text-[11px] text-slate-500 dark:text-slate-400">আসল ছবি ও প্রতীক অক্ষত</p>
+              <p className="text-[10px] sm:text-[11px] text-slate-500 dark:text-slate-400">আসল ছবি ও প্রতীক অক্ষত</p>
             </div>
           </div>
         </div>

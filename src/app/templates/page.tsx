@@ -238,13 +238,13 @@ function TemplatesContent() {
       </div>
 
       {/* Category Pills Filter with Smart Clean Styling */}
-      <div className="flex flex-wrap items-center justify-center gap-2">
+      <div className="flex items-center sm:justify-center overflow-x-auto no-scrollbar gap-2 pb-2 sm:pb-0 px-1 sm:px-0">
         {CATEGORIES.map((cat) => (
           <button
             key={cat.id}
             type="button"
             onClick={() => setSelectedOccasion(cat.id)}
-            className={`px-4 py-2 rounded-xl text-xs font-bold transition-all font-bengali ${
+            className={`px-3.5 sm:px-4 py-2 rounded-xl text-xs font-bold transition-all font-bengali whitespace-nowrap flex-shrink-0 active:scale-95 ${
               selectedOccasion === cat.id
                 ? 'bg-gradient-to-r from-emerald-600 to-teal-700 text-white shadow-md shadow-emerald-700/20'
                 : 'bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-800 shadow-sm'

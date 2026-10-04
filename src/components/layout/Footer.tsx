@@ -8,8 +8,8 @@ import { Sparkles, Printer, CheckCircle, Heart } from 'lucide-react';
 export const Footer: React.FC = () => {
   const pathname = usePathname();
 
-  // Hide footer completely on Admin Panel
-  if (pathname.startsWith('/admin')) {
+  // Hide footer completely on Admin Panel & Auth Page
+  if (pathname.startsWith('/admin') || pathname.startsWith('/auth')) {
     return null;
   }
 
