@@ -1,11 +1,9 @@
-# 🇧🇩 ডিজিটাল পোস্টারমেকার — AI Political & Election Poster Maker
+# 🇧🇩 AI Political Poster Maker — Digital Campaign & Poster Studio
 
 <div align="center">
 
-![AI Political Poster Maker Banner](public/logo.png)
-
-### **বাংলাদেশের প্রথম এআই চালিত ডিজিটাল রাজনৈতিক ও নির্বাচনী পোস্টার ক্রিয়েটর প্ল্যাটফর্ম**
-*Design high-resolution, print-ready (300 DPI) political, commemorative, and campaign posters in minutes with Gemini AI slogan generation, dynamic canvas customization, and rich Bengali typography.*
+### **Bangladesh's First AI-Powered Digital Political & Campaign Poster Creation Platform**
+*Design high-resolution, 300 DPI print-ready political, election, and commemorative posters in minutes with Gemini AI slogan generation, real-time canvas editing, and rich Bengali typography.*
 
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-Frontend%20(Vercel)-00C7B7?style=for-the-badge&logo=vercel&logoColor=white)](https://ai-political-poster-maker-frontend-xi.vercel.app/)
 [![API Status](https://img.shields.io/badge/Live%20API-Backend%20(Vercel)-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://ai-political-poster-maker-backend-nine.vercel.app/)
@@ -14,139 +12,137 @@
 [![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.4-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 [![Google Gemini](https://img.shields.io/badge/Google%20Gemini-2.0%20Flash-8E75B2?style=for-the-badge&logo=googlegemini&logoColor=white)](https://deepmind.google/technologies/gemini/)
 
-[লাইভ ডেমো দেখুন](https://ai-political-poster-maker-frontend-xi.vercel.app/) • [পোস্টার স্টুডিও](https://ai-political-poster-maker-frontend-xi.vercel.app/studio) • [টেমপ্লেট গ্যালারি](https://ai-political-poster-maker-frontend-xi.vercel.app/templates) • [অ্যাডমিন প্যানেল](https://ai-political-poster-maker-frontend-xi.vercel.app/admin)
+[Explore Live Demo](https://ai-political-poster-maker-frontend-xi.vercel.app/) • [Poster Studio](https://ai-political-poster-maker-frontend-xi.vercel.app/studio) • [Template Gallery](https://ai-political-poster-maker-frontend-xi.vercel.app/templates) • [Admin Dashboard](https://ai-political-poster-maker-frontend-xi.vercel.app/admin)
 
 </div>
 
 ---
 
-## 🌟 মূল বৈশিষ্ট্যসমূহ (Key Features)
+## 🌟 Key Features
 
-### 1. 🎨 রিয়েল-টাইম পোস্টার কাস্টমাইজার ও ক্যানভাস (Interactive Poster Studio)
-- **লাইভ প্রিভিউ ও ইনস্ট্যান্ট রেন্ডারিং**: টেক্সট, স্লোগান, ফন্ট সাইজ ও লেআউট পরিবর্তনের সাথে সাথে ক্যানভাসে রিয়েল-টাইম আপডেট।
-- **ছবি আপলোড ও ফ্রেম অ্যাডজাস্টমেন্ট**: প্রার্থী ও শীর্ষ নেতার ছবি আপলোড, ড্র্যাগ, রিসাইজ ও রোটেশন সুবিধা।
-- **বহুদলীয় রাজনৈতিক প্রতীক ও থিম**: আওয়ামী লীগ, বিএনপি, জামায়াত, জাতীয় পার্টি, ইসলামী আন্দোলনসহ স্বতন্ত্র ও জাতীয় উৎসবের জন্য আলাদা কালার স্কিম ও দলীয় প্রতীক।
+### 1. 🎨 Real-Time Interactive Poster Studio
+- **Live Canvas Rendering**: Instant preview of text headlines, subtitles, designated candidate details, party logos, and leadership banners.
+- **Photo Upload & Frame Adjuster**: Upload and position candidate portraits with scale, rotation, and aspect ratio controls.
+- **Multi-Party Presets**: Color schemes, party symbols, and leadership photo placements for major political parties, independent candidates, and national commemorative events.
 
-### 2. 🤖 গুগল জেমিনি এআই স্লোগান ও বক্তব্য জেনারেটর (Gemini AI Integration)
-- প্রার্থী, পদবী, এলাকা (জেলা, থানা/ইউনিয়ন) এবং উপলক্ষের উপর ভিত্তি করে শক্তিশালী নির্বাচনী ও রাজনৈতিক স্লোগান তৈরি।
-- **বাংলা ভয়েস টাইপিং (Speech-to-Text)**: সরাসরি মুখে কথা বলে স্লোগান প্রম্পট দেওয়ার সুবিধা।
-- **১-ক্লিক অ্যাপ্লাই**: পছন্দের এআই স্লোগানটিতে ক্লিক করলেই তা সাথে সাথে পোস্টার ব্যানারে সেট হয়ে যায়।
+### 2. 🤖 Google Gemini AI Political Slogan & Speech Generator
+- Context-aware slogan generation tailored to specific occasions (Elections, National Days, Party Conventions, Eid Greetings).
+- **Bangla Speech-to-Text (Voice Recognition)**: Dictate prompts directly using microphone input.
+- **1-Click Apply**: Automatically transfer AI-generated headlines and slogans onto the canvas.
 
-### 3. 📐 রেডিমেড প্রফেশনাল টেমপ্লেট লাইব্রেরি (Ready-to-Use Templates)
-- ১০+ হাই-কোয়ালিটি টেমপ্লেট: সাধারণ নির্বাচন, জাতীয় সংসদ, ঈদ শুভেচ্ছা, স্বাধীনতা দিবস, বিজয় দিবস, একুশে ফেব্রুয়ারি, সম্মেলন ইত্যাদি।
-- ক্যাটাগরি অনুযায়ী ফিল্টারিং এবং মোবাইল ফ্রেন্ডলি সোয়াইপেবল ট্যাব বার।
+### 3. 📐 10+ Pixel-Perfect Ready-to-Use Templates
+- Curated election and celebration poster designs.
+- Category filtering with responsive, swipeable tabs on mobile.
 
-### 4. 🖨️ আল্ট্রা হাই-রেজুলেশন প্রিন্ট এক্সপোর্ট (300 DPI Export)
-- ডিজিটাল প্রচারের জন্য **PNG** / **JPEG** এবং সরাসরি প্রেসে প্রিন্ট করার জন্য **৩০০ DPI প্রিন্ট-রেডি PDF** এক্সপোর্ট।
+### 4. 🖨️ 300 DPI High-Resolution Export
+- High-fidelity export options in **PNG**, **JPEG**, and **300 DPI Print-Ready PDF** for professional offset press printing.
 
-### 5. 🛡️ অ্যাডমিন মডারেশন ড্যাশবোর্ড ও কন্টেন্ট পলিসি (Admin Moderation Panel)
-- নিষিদ্ধ দলীয় প্রতীক, সংবেদনশীল শব্দ ও হেট-স্পিচ প্রিভেনশন।
-- ইউজারভিত্তিক পোস্টার পর্যবেক্ষণ, অনুমোদন (Approve) ও ফ্ল্যাগ (Flag) করার সম্পূর্ণ অ্যাডমিন কন্ট্রোল।
-- প্ল্যাটফর্মের রিয়েল-টাইম ইউজার, পোস্টার ও জেনারেশন অ্যানালিটিক্স।
+### 5. 🛡️ Content Policy & Admin Moderation Panel
+- Prohibited party symbols and hate-speech filtering.
+- Admin dashboard to inspect, approve, or flag user-generated posters with real-time statistics.
 
-### 6. 🔒 সিকিউর অথেন্টিকেশন ও ওয়ান-ক্লিক অ্যাডমিন টেস্ট (Auth & Security)
-- **Better Auth Integration**: ১-ক্লিকে গুগল অ্যাকাউন্ট দিয়ে সোশ্যাল সাইন-ইন।
-- **JWT সিকিউর লগইন / রেজিস্ট্রেশন**: পাসওয়ার্ড হ্যাশিং ও রেসপন্সিভ অথ কার্ড।
-- **১-ক্লিক অ্যাডমিন ডেমো লগইন**: টেস্ট ও ইভালুয়েশনের জন্য সরাসরি এক ক্লিকে অ্যাডমিন প্যানেল এক্সেস।
+### 6. 🔒 Authentication & 1-Click Evaluation Login
+- **Better Auth Integration**: Google 1-Click Social Sign-In.
+- **JWT Authentication**: Secure registration and login flow.
+- **1-Click Admin Demo Login**: Instant access for evaluation and demonstration.
 
-### 7. 🌓 ডার্ক ও লাইট মোড + ১০০% মোবাইল রেসপনসিভ
-- চোখের স্বস্তির জন্য প্রিমিয়াম ডার্ক এবং লাইট থিম সাপোর্ট।
-- স্মার্টফোন, ট্যাবলেট এবং বড় মনিটরে চমৎকারভাবে অপ্টিমাইজড UI।
+### 7. 🌓 Dark / Light Mode & 100% Mobile Responsive
+- Optimized for desktop, tablet, and mobile displays.
 
 ---
 
-## 🛠️ টেকনোলজি স্ট্যাক (Technology Stack)
+## 🛠️ Technology Stack
 
-| স্তর | টেকনোলজি | ব্যবহার |
+| Layer | Technology | Purpose |
 |---|---|---|
-| **Core Framework** | Next.js 15.3 (App Router) | SSR, SSG ও ফাস্ট ক্লায়েন্ট রাউটিং |
-| **Language** | TypeScript | টাইপ সেফটি ও ক্লিন আর্কিটেকচার |
-| **Styling** | TailwindCSS + Vanilla CSS | কাস্টম ডিজাইন সিস্টেম ও রেসপনসিভনেস |
-| **Canvas Rendering** | HTML5 Canvas + Fabric.js & html2canvas | হাই-রেজুলেশন পোস্টার রেন্ডারিং ও এক্সপোর্ট |
-| **Icons** | Lucide React | মডার্ন লাইটওয়েট ভেক্টর আইকন |
-| **Notifications** | React Toastify | ইন্টারঅ্যাক্টিভ ইউজার নোটিফিকেশন |
-| **AI Engine** | Google Gemini 2.0 Flash REST API | পলিটিক্যাল স্লোগান ও কন্টেন্ট জেনারেশন |
-| **Authentication** | Better Auth + JWT Token | গুগল OAuth ও কাস্টম অথেন্টিকেশন |
-| **Backend API** | Node.js / Express.js + MongoDB | ডাটাবেজ, হিস্ট্রি ও অ্যাডমিন কন্ট্রোল |
-| **Deployment** | Vercel | গ্লোবাল এজ সিডিএন ও সিআই/সিডি অটোমেশন |
+| **Frontend Framework** | Next.js 15.3 (App Router) | SSR, SSG & Fast Client Navigation |
+| **Language** | TypeScript | Strong typing & robust architecture |
+| **Styling** | TailwindCSS + CSS Variables | Responsive design system & Dark/Light theming |
+| **Canvas Engine** | HTML5 Canvas + html2canvas | Real-time graphics rendering & high-res export |
+| **AI Integration** | Google Gemini 2.0 Flash REST API | Automated political slogans & campaign copywriting |
+| **Authentication** | Better Auth + JWT | Google OAuth & Credential Auth |
+| **Icons** | Lucide React | Lightweight vector icons |
+| **Notifications** | React Toastify | User action feedback |
+| **Backend API** | Express.js / Node.js + MongoDB Atlas | Persistent storage, history, and moderation API |
+| **Deployment** | Vercel | Global Edge CDN & CI/CD deployment |
 
 ---
 
-## 🏗️ সিস্টেম আর্কিটেকচার (System Architecture)
+## 🏗️ System Architecture
 
 ```mermaid
 graph TD
-    User([👤 ব্যবহারকারী / রাজনৈতিক কর্মী]) -->|ব্রাউজার এক্সেস| Frontend[Next.js 15 Frontend Client]
+    User([👤 User / Campaign Organizer]) -->|Browser Access| Frontend[Next.js 15 Frontend Client]
     
-    subgraph Frontend Ecosystem
-        AuthModule[Better Auth / JWT Auth]
-        Studio[পোস্টার স্টুডিও ও ক্যানভাস কাস্টমাইজার]
-        AIModule[Gemini AI স্লোগান জেনারেটর]
-        TemplateGallery[টেমপ্লেট গ্যালারি ও ফিল্টার]
-        HistoryPanel[পোস্টার হিস্ট্রি ও সেভ]
-        AdminPanel[🛡️ অ্যাডমিন মডারেশন ড্যাশবোর্ড]
+    subgraph Frontend Application
+        Auth[Better Auth / JWT Auth]
+        Studio[Poster Studio & Canvas Customizer]
+        AI[Gemini AI Slogan Generator]
+        Templates[Template Library & Filters]
+        History[Saved Poster History]
+        Admin[🛡️ Admin Moderation Dashboard]
     end
     
-    Frontend --> AuthModule
+    Frontend --> Auth
     Frontend --> Studio
-    Frontend --> AIModule
-    Frontend --> TemplateGallery
-    Frontend --> HistoryPanel
-    Frontend --> AdminPanel
+    Frontend --> AI
+    Frontend --> Templates
+    Frontend --> History
+    Frontend --> Admin
     
     subgraph Backend & External Services
         GoogleOAuth[Google Cloud OAuth 2.0]
-        GeminiAPI[Google Gemini 2.0 Flash AI]
-        NodeBackend[Express.js REST API Backend]
+        GeminiAPI[Google Gemini 2.0 Flash API]
+        BackendAPI[Express.js REST API Backend]
         MongoDB[(MongoDB Atlas Database)]
     end
     
-    AuthModule -->|Google Sign-In| GoogleOAuth
-    AIModule -->|Generate Slogans| NodeBackend
-    NodeBackend -->|Multi-Key Rotation| GeminiAPI
-    NodeBackend -->|CRUD Data| MongoDB
-    HistoryPanel -->|Fetch & Delete| NodeBackend
-    AdminPanel -->|Moderate Posters| NodeBackend
+    Auth -->|Social Sign-In| GoogleOAuth
+    AI -->|Generate Prompts| BackendAPI
+    BackendAPI -->|Multi-Key Rotation| GeminiAPI
+    BackendAPI -->|CRUD Operations| MongoDB
+    History -->|Manage Posters| BackendAPI
+    Admin -->|Moderate & Analytics| BackendAPI
 ```
 
 ---
 
-## 🚀 লোকাল সেটআপ গাইড (Local Development Setup)
+## 🚀 Local Development Setup
 
-### ১. রিপোজিটরি ক্লোন করুন
+### 1. Clone the Repository
 ```bash
 git clone https://github.com/Saad7528/ai-political-poster-maker-frontend.git
 cd ai-political-poster-maker-frontend
 ```
 
-### ২. ডিপেন্ডেন্সি ইনস্টল করুন
+### 2. Install Dependencies
 ```bash
 npm install
 ```
 
-### ৩. এনভায়রনমেন্ট ভ্যারিয়েবল কনফিগারেশন (`.env.local`)
-রুট ডিরেক্টরিতে `.env.local` ফাইল তৈরি করুন এবং নিচের মানগুলো বসান:
+### 3. Environment Variables Configuration (`.env.local`)
+Create a `.env.local` file in the root directory:
 
 ```env
-# Backend REST API URL
+# Backend REST API
 NEXT_PUBLIC_API_URL=http://localhost:5000/api
 
 # Better Auth Configuration (Google Social Login)
 BETTER_AUTH_URL=http://localhost:3000
 BETTER_AUTH_SECRET=rise_together_political_poster_maker_super_secure_jwt_secret_2026_bd
 
-# Google OAuth Client Credentials
+# Google OAuth Credentials
 GOOGLE_CLIENT_ID=your_google_client_id_here
 GOOGLE_CLIENT_SECRET=your_google_client_secret_here
 ```
 
-### ৪. ডেভেলপমেন্ট সার্ভার চালু করুন
+### 4. Run Development Server
 ```bash
 npm run dev
 ```
-ব্রাউজারে [http://localhost:3000](http://localhost:3000) ওপেন করে প্রজেক্টটি উপভোগ করুন।
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-### ৫. প্রোডাকশন বিল্ড তৈরি করুন
+### 5. Production Build
 ```bash
 npm run build
 npm run start
@@ -154,51 +150,61 @@ npm run start
 
 ---
 
-## 📁 ফোল্ডার স্ট্রাকচার (Project Directory Structure)
+## 📁 Project Directory Structure
 
 ```
 frontend/
-├── public/                     # স্ট্যাটিক অ্যাসেটস (লোগো, আইকন, ফন্টস)
+├── public/                     # Static assets (favicons, fonts, symbols)
 ├── src/
-│   ├── app/                    # Next.js App Router পেজসমূহ
-│   │   ├── admin/              # 🛡️ অ্যাডমিন মডারেশন প্যানেল
-│   │   ├── api/auth/           # Better Auth API হ্যান্ডলার
-│   │   ├── auth/               # 🔐 সাইন ইন / রেজিস্ট্রেশন পেজ
-│   │   ├── history/            # 📂 সংরক্ষিত পোস্টার হিস্ট্রি
-│   │   ├── studio/             # 🎨 মূল পোস্টার ডিজাইন স্টুডিও
-│   │   ├── templates/          # 🖼️ টেমপ্লেট গ্যালারি
-│   │   ├── layout.tsx          # গ্লোবাল লেআউট ও মেটাডাটা
-│   │   └── page.tsx            # ল্যান্ডিং ও ফিচার হোমপেজ
+│   ├── app/                    # Next.js App Router pages
+│   │   ├── admin/              # 🛡️ Admin moderation dashboard
+│   │   ├── api/auth/           # Better Auth route handlers
+│   │   ├── auth/               # 🔐 Clean standalone sign-in / registration
+│   │   ├── history/            # 📂 Saved user posters gallery
+│   │   ├── studio/             # 🎨 Main interactive poster editor
+│   │   ├── templates/          # 🖼️ Ready-to-use template library
+│   │   ├── layout.tsx          # Root layout with fonts & metadata
+│   │   └── page.tsx            # Landing hero & feature showcase
 │   ├── components/
-│   │   ├── layout/             # ন্যাভবার, ফুটার ও থিম প্রোভাইডার
-│   │   ├── poster/             # ক্যানভাস, কন্ট্রোলস, এআই স্লোগান প্যানেল
-│   │   └── ui/                 # কনফার্ম মোডাল, লোডার ও প্রিভিউ কার্ড
+│   │   ├── layout/             # Navbar, Footer & Theme Provider
+│   │   ├── poster/             # PosterCanvas, Controls, AISloganGenerator
+│   │   └── ui/                 # ConfirmModal, Loaders & Preview Cards
 │   ├── context/                # AuthContext, ThemeContext
-│   ├── lib/                    # API ক্লায়েন্ট, Better Auth ক্লায়েন্ট ও ইউটিলিটি
-│   └── types/                  # TypeScript ইন্টারফেস ও ডাটা মডেল
-├── tailwind.config.ts          # টেইলউইন্ড সিএসএস কনফিগারেশন
-├── tsconfig.json               # টাইপস্ক্রিপ্ট কনফিগারেশন
-└── package.json                # প্রজেক্ট ডিপেন্ডেন্সি ও স্ক্রিপ্ট
+│   ├── lib/                    # API client, Better Auth client & helpers
+│   └── types/                  # TypeScript interfaces & data contracts
+├── tailwind.config.ts          # Tailwind CSS theme extension
+├── tsconfig.json               # TypeScript compiler config
+└── package.json                # Project dependencies and build scripts
 ```
 
 ---
 
-## 🛡️ অ্যাডমিন ড্যাশবোর্ড ক্রেডেনশিয়াল (Admin Demo Access)
+## 🛡️ Admin Demo Access
 
-- **ইমেইল**: `admin@politicalposter.bd`
-- **পাসওয়ার্ড**: `Admin12345!`
-- **অথবা**: লগইন পেজে থাকা `🛡️ অ্যাডমিন টেস্ট লগইন (১-ক্লিক)` বাটনে ক্লিক করে সরাসরি এক্সেস করুন।
-
----
-
-## 👨‍💻 অবদান ও ক্রেডিট (Author & Credits)
-
-- **প্রজেক্ট নাম**: AI Political Poster Maker (ডিজিটাল পোস্টারমেকার)
-- **উন্নয়নে**: [S. M. Amirul Islam Saad](https://github.com/Saad7528)
-- **লাইসেন্স**: MIT License (সকলের জন্য উন্মুক্ত)
+- **Email**: `admin@politicalposter.bd`
+- **Password**: `Admin12345!`
+- *Or click the "🛡️ 1-Click Admin Demo Login" button on the login page.*
 
 ---
 
-<div align="center">
-  <sub>দেশপ্রেম, নির্ভুল বাংলা টাইপোগ্রাফি ও আধুনিক প্রযুক্তির সমন্বয়ে নির্মিত ❤️</sub>
-</div>
+## 🎯 Project Context & Evaluation Details
+
+> **Note**: This project was developed by **[S. M. Amirul Islam Saad](https://github.com/Saad7528)** as part of the technical assessment and practical evaluation for the **Full Stack Developer** position at **[Rise Together](https://risetogetherbd.com/)**.
+
+### 📋 Assessment Summary
+| Parameter | Details |
+|---|---|
+| **Challenge Name** | AI Political Poster Maker |
+| **Target Role** | Full Stack Developer |
+| **Company** | [Rise Together](https://risetogetherbd.com) |
+| **Candidate** | S. M. Amirul Islam Saad |
+| **Submission Deadline** | 10/4/2026, 11:59:00 PM |
+| **Status** | ✅ Completed, Verified & Deployed |
+| **Frontend Live URL** | [https://ai-political-poster-maker-frontend-xi.vercel.app](https://ai-political-poster-maker-frontend-xi.vercel.app/) |
+| **Backend API Live URL** | [https://ai-political-poster-maker-backend-nine.vercel.app](https://ai-political-poster-maker-backend-nine.vercel.app/) |
+
+---
+
+## 📄 License
+
+This project is licensed under the [MIT License](LICENSE).
