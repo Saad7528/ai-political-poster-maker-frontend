@@ -1,16 +1,18 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { ITemplate, IPosterFormData, ITopLeader, IAISloganResponse, PosterArchetype, ICandidatePhotoAdjustments } from '@/types';
 import { BANGLADESHI_POLITICAL_PARTIES, IPartyInfo } from '@/data/politicalParties';
-import { PosterCanvas } from './PosterCanvas';
+import { PosterCanvas, PosterCanvasHandle } from './PosterCanvas';
 import { PartySymbolSelector } from './PartySymbolSelector';
 import { TopLeadersUploader } from './TopLeadersUploader';
 import { CandidatePhotoUploader } from './CandidatePhotoUploader';
 import { AISloganGenerator } from './AISloganGenerator';
 import { api } from '@/lib/api';
 import { useAuth } from '@/context/AuthContext';
+import { compressImage } from '@/lib/imageCompressor';
+
 import {
   Sparkles,
   Save,
@@ -20,8 +22,11 @@ import {
   MapPin,
   User,
   Zap,
+  LogIn,
+  X,
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
+import { toast } from 'react-toastify';
 
 interface PosterStudioProps {
   initialTemplate?: ITemplate | null;
@@ -31,8 +36,9 @@ export const PosterStudio: React.FC<PosterStudioProps> = ({ initialTemplate }) =
   const searchParams = useSearchParams();
   const templateIdParam = searchParams.get('templateId');
   const posterIdParam = searchParams.get('posterId');
+  const canvasRef = useRef<PosterCanvasHandle>(null);
 
-  const { user, token, demoLogin } = useAuth();
+  const { user, token } = useAuth();
   const [selectedTemplate, setSelectedTemplate] = useState<ITemplate | null>(initialTemplate || null);
 
   const [formData, setFormData] = useState<IPosterFormData>({
@@ -89,8 +95,29 @@ export const PosterStudio: React.FC<PosterStudioProps> = ({ initialTemplate }) =
 
   const [generating, setGenerating] = useState(false);
   const [successMessage, setSuccessMessage] = useState<string>('');
+  const [errorMessage, setErrorMessage] = useState<string>('');
+  const [authModalOpen, setAuthModalOpen] = useState<boolean>(false);
 
-  // Load template if templateIdParam exists
+  // Restore saved draft on mount if available and no posterIdParam
+  useEffect(() => {
+    if (!posterIdParam && typeof window !== 'undefined') {
+      try {
+        const savedDraft = localStorage.getItem('poster_studio_draft');
+        if (savedDraft) {
+          const parsed = JSON.parse(savedDraft);
+          if (parsed.formData) setFormData(parsed.formData);
+          if (parsed.topLeaders && parsed.topLeaders.length > 0) setTopLeaders(parsed.topLeaders);
+          if (parsed.candidatePhotoUrl) setCandidatePhotoUrl(parsed.candidatePhotoUrl);
+          if (parsed.partySymbolUrl) setPartySymbolUrl(parsed.partySymbolUrl);
+          if (parsed.candidateAdjustments) setCandidateAdjustments(parsed.candidateAdjustments);
+        }
+      } catch (err) {
+        console.warn('Draft recovery failed:', err);
+      }
+    }
+  }, [posterIdParam]);
+
+  // Load template on mount
   useEffect(() => {
     if (templateIdParam) {
       api.getTemplateById(templateIdParam).then((res) => {
@@ -106,6 +133,12 @@ export const PosterStudio: React.FC<PosterStudioProps> = ({ initialTemplate }) =
           }));
         }
       }).catch(console.error);
+    } else if (!selectedTemplate) {
+      api.getTemplates().then((res) => {
+        if (res.success && res.data && res.data.length > 0) {
+          setSelectedTemplate(res.data[0]);
+        }
+      }).catch(console.error);
     }
   }, [templateIdParam]);
 
@@ -116,10 +149,36 @@ export const PosterStudio: React.FC<PosterStudioProps> = ({ initialTemplate }) =
       api.getPosterById(posterIdParam, activeToken).then((res) => {
         if (res.success && res.data) {
           const poster = res.data;
-          if (poster.formData) setFormData(poster.formData);
-          if (poster.topLeadersPhotos) setTopLeaders(poster.topLeadersPhotos);
-          if (poster.candidatePhotoUrl) setCandidatePhotoUrl(poster.candidatePhotoUrl);
-          if (poster.partySymbolUrl) setPartySymbolUrl(poster.partySymbolUrl);
+          if (poster.formData) {
+            setFormData((prev) => ({
+              ...prev,
+              ...poster.formData,
+            }));
+            if (poster.formData.candidateAdjustments) {
+              setCandidateAdjustments(poster.formData.candidateAdjustments);
+            }
+          }
+          if (poster.candidateAdjustments) {
+            setCandidateAdjustments(poster.candidateAdjustments);
+          }
+          if (poster.topLeadersPhotos && poster.topLeadersPhotos.length > 0) {
+            setTopLeaders(poster.topLeadersPhotos);
+          }
+          if (poster.candidatePhotoUrl) {
+            setCandidatePhotoUrl(poster.candidatePhotoUrl);
+          }
+          if (poster.partySymbolUrl) {
+            setPartySymbolUrl(poster.partySymbolUrl);
+          }
+          if (poster.templateId) {
+            if (typeof poster.templateId === 'object' && poster.templateId !== null) {
+              setSelectedTemplate(poster.templateId as ITemplate);
+            } else {
+              api.getTemplateById(poster.templateId as string).then((tRes) => {
+                if (tRes.success && tRes.data) setSelectedTemplate(tRes.data);
+              }).catch(console.error);
+            }
+          }
         }
       }).catch(console.error);
     }
@@ -161,39 +220,121 @@ export const PosterStudio: React.FC<PosterStudioProps> = ({ initialTemplate }) =
   };
 
   const handleSavePoster = async () => {
-    setGenerating(true);
     setSuccessMessage('');
+    setErrorMessage('');
+
+    const activeToken = token || (typeof window !== 'undefined' ? localStorage.getItem('poster_token') : null) || '';
+    const activeUser = user || (typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('poster_user') || 'null') : null);
+
+    // If user is not logged in, prompt to login without saving automatically
+    if (!activeToken || !activeUser) {
+      if (typeof window !== 'undefined') {
+        try {
+          localStorage.setItem(
+            'poster_studio_draft',
+            JSON.stringify({
+              formData,
+              topLeaders,
+              candidatePhotoUrl,
+              partySymbolUrl,
+              candidateAdjustments,
+              templateId: selectedTemplate?._id,
+            })
+          );
+        } catch {
+          // ignore
+        }
+      }
+      setErrorMessage('পোস্টার হিস্ট্রিতে সেভ করতে অনুগ্রহ করে প্রথমে আপনার অ্যাকাউন্টে লগইন করুন।');
+      setAuthModalOpen(true);
+      return;
+    }
+
+    setGenerating(true);
 
     try {
-      let activeToken = token || (typeof window !== 'undefined' ? localStorage.getItem('poster_token') : null) || '';
-      if (!activeToken) {
-        await demoLogin();
-        activeToken = (typeof window !== 'undefined' ? localStorage.getItem('poster_token') : null) || '';
+      const templateId = selectedTemplate?._id || '67a100000000000000000001';
+
+      // 1. Snapshot full visual poster for history gallery display
+      let snapshotUrl = '';
+      if (canvasRef.current?.getSnapshotUrl) {
+        try {
+          snapshotUrl = await canvasRef.current.getSnapshotUrl();
+        } catch (e) {
+          console.warn('Canvas snapshot failed:', e);
+        }
       }
+
+      // 2. Compress Candidate Photo if Base64
+      const optimizedCandidatePhoto = candidatePhotoUrl
+        ? await compressImage(candidatePhotoUrl, 1000, 1400, 0.85)
+        : '';
+
+      // 3. Compress Top Leaders Photos if Base64
+      const optimizedLeaders = await Promise.all(
+        topLeaders.map(async (leader) => ({
+          ...leader,
+          url: leader.url ? await compressImage(leader.url, 600, 600, 0.85) : '',
+        }))
+      );
+
+      // 4. Compress Party Symbol if Base64
+      const optimizedSymbol = partySymbolUrl
+        ? await compressImage(partySymbolUrl, 400, 400, 0.9)
+        : '';
 
       const res = await api.createPoster(
         {
-          templateId: selectedTemplate?._id || '6ac0db71196f4286716d1f46',
-          formData,
-          topLeadersPhotos: topLeaders,
-          candidatePhotoUrl,
-          partySymbolUrl,
+          templateId,
+          formData: {
+            ...formData,
+            candidateAdjustments,
+          },
+          candidateAdjustments,
+          topLeadersPhotos: optimizedLeaders,
+          candidatePhotoUrl: optimizedCandidatePhoto,
+          partySymbolUrl: optimizedSymbol,
+          generatedImageUrl: snapshotUrl || '',
           aiEnhanced: true,
         },
-        activeToken || ''
+        activeToken
       );
 
       if (res.success) {
-        setSuccessMessage('পোস্টারটি সফলভাবে তৈরি ও আপনার হিস্ট্রিতে সংরক্ষিত হয়েছে!');
+        // Clear saved draft once successfully saved
+        if (typeof window !== 'undefined') {
+          localStorage.removeItem('poster_studio_draft');
+        }
+        setSuccessMessage('পোস্টারটি সফলভাবে তৈরি ও আপনার অ্যাকাউন্টের হিস্ট্রিতে সংরক্ষিত হয়েছে!');
+        toast.success('পোস্টারটি সফলভাবে হিস্ট্রিতে সেভ করা হয়েছে!');
         confetti({
           particleCount: 80,
           spread: 70,
           origin: { y: 0.6 },
         });
+      } else {
+        let msg = res.message || 'পোস্টার সেভ করতে সমস্যা হয়েছে।';
+        if (msg.toLowerCase().includes('entity too large') || msg.toLowerCase().includes('payload')) {
+          msg = 'ছবির সাইজ অনেক বড় ছিল। ছবিগুলো অপ্টিমাইজ করা হয়েছে, দয়া করে আবার "সেভ করুন" বাটনে ক্লিক করুন।';
+        } else if (msg.toLowerCase().includes('token') || msg.toLowerCase().includes('unauthorized') || msg.toLowerCase().includes('অননুমোদিত') || msg.toLowerCase().includes('মেয়াদোত্তীর্ণ')) {
+          msg = 'আপনার লগইন সেশনের মেয়াদ শেষ হয়েছে। অনুগ্রহ করে আবার লগইন করুন।';
+          setAuthModalOpen(true);
+        }
+        setErrorMessage(msg);
+        toast.error(msg);
       }
     } catch (e: unknown) {
-      const msg = e instanceof Error ? e.message : 'Save error';
-      console.error('Save error:', msg);
+      const rawMsg = e instanceof Error ? e.message : 'Save error';
+      console.error('Save error:', rawMsg);
+      if (rawMsg.toLowerCase().includes('entity too large') || rawMsg.toLowerCase().includes('payload')) {
+        const msg = 'ছবির ফাইল সাইজ বড়। স্বয়ংক্রিয়ভাবে কম্প্রেস করা হয়েছে, আবার সেভ করুন।';
+        setErrorMessage(msg);
+        toast.warning(msg);
+      } else {
+        const msg = 'সার্ভার কানেকশনে সমস্যা হয়েছে। অনুগ্রহ করে ইন্টারনেট সংযোগ চেক করে আবার চেষ্টা করুন।';
+        setErrorMessage(msg);
+        toast.error(msg);
+      }
     } finally {
       setGenerating(false);
     }
@@ -224,9 +365,33 @@ export const PosterStudio: React.FC<PosterStudioProps> = ({ initialTemplate }) =
       </div>
 
       {successMessage && (
-        <div className="p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center gap-3 text-emerald-700 dark:text-emerald-400 text-sm font-bengali font-bold">
-          <CheckCircle2 className="w-5 h-5 flex-shrink-0" />
-          <span>{successMessage}</span>
+        <div className="p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-between gap-3 text-emerald-700 dark:text-emerald-400 text-sm font-bengali font-bold">
+          <div className="flex items-center gap-2">
+            <CheckCircle2 className="w-5 h-5 flex-shrink-0" />
+            <span>{successMessage}</span>
+          </div>
+          <a
+            href="/history"
+            className="px-3 py-1 rounded-xl bg-emerald-600 text-white text-xs hover:bg-emerald-500 transition-colors shadow-sm"
+          >
+            আমার হিস্ট্রি দেখুন →
+          </a>
+        </div>
+      )}
+
+      {errorMessage && (
+        <div className="p-4 rounded-2xl bg-rose-500/10 border border-rose-500/30 flex items-center justify-between gap-3 text-rose-700 dark:text-rose-400 text-sm font-bengali font-bold">
+          <div className="flex items-center gap-2">
+            <span>⚠️ {errorMessage}</span>
+          </div>
+          {errorMessage.includes('লগইন') && (
+            <a
+              href="/auth?redirect=/studio"
+              className="px-3.5 py-1.5 rounded-xl bg-emerald-600 text-white text-xs hover:bg-emerald-500 transition-colors shadow-sm whitespace-nowrap"
+            >
+              লগইন করুন →
+            </a>
+          )}
         </div>
       )}
 
@@ -252,12 +417,9 @@ export const PosterStudio: React.FC<PosterStudioProps> = ({ initialTemplate }) =
               selectedPartyKey={formData.selectedPartyKey}
               onSelectParty={handleSelectParty}
               customSymbolUrl={partySymbolUrl}
-              onUploadCustomSymbol={(file) => {
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                  if (e.target?.result) setPartySymbolUrl(e.target.result as string);
-                };
-                reader.readAsDataURL(file);
+              onUploadCustomSymbol={async (file) => {
+                const compressed = await compressImage(file, 400, 400, 0.9);
+                if (compressed) setPartySymbolUrl(compressed);
               }}
             />
           </div>
@@ -281,21 +443,19 @@ export const PosterStudio: React.FC<PosterStudioProps> = ({ initialTemplate }) =
                   return updated;
                 })
               }
-              onUploadLeaderPhoto={(idx, file) => {
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                  if (e.target?.result) {
-                    setTopLeaders((prev) => {
-                      const updated = [...prev];
-                      updated[idx] = { ...updated[idx], url: e.target?.result as string };
-                      return updated;
-                    });
-                  }
-                };
-                reader.readAsDataURL(file);
+              onUploadLeaderPhoto={async (idx, file) => {
+                const compressed = await compressImage(file, 600, 600, 0.85);
+                if (compressed) {
+                  setTopLeaders((prev) => {
+                    const updated = [...prev];
+                    updated[idx] = { ...updated[idx], url: compressed };
+                    return updated;
+                  });
+                }
               }}
             />
           </div>
+
 
           {/* Candidate Information Form */}
           <div className="p-5 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
@@ -428,6 +588,7 @@ export const PosterStudio: React.FC<PosterStudioProps> = ({ initialTemplate }) =
 
           <div className="w-full flex justify-center bg-white dark:bg-slate-900/60 p-4 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm dark:shadow-inner overflow-x-auto">
             <PosterCanvas
+              ref={canvasRef}
               template={selectedTemplate}
               formData={formData}
               topLeaders={topLeaders}
@@ -449,6 +610,50 @@ export const PosterStudio: React.FC<PosterStudioProps> = ({ initialTemplate }) =
           </div>
         </div>
       </div>
+
+      {/* Auth Requirement Modal */}
+      {authModalOpen && (
+        <div
+          className="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-200"
+          onClick={() => setAuthModalOpen(false)}
+        >
+          <div
+            className="relative max-w-md w-full bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800 shadow-2xl space-y-5 text-center font-bengali"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="w-16 h-16 mx-auto rounded-2xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 flex items-center justify-center shadow-sm">
+              <LogIn className="w-8 h-8" />
+            </div>
+
+            <div className="space-y-2">
+              <h3 className="text-lg font-black text-slate-900 dark:text-white">
+                পোস্টার হিস্ট্রিতে সেভ করতে লগইন আবশ্যক
+              </h3>
+              <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                আপনার তৈরি করা পোস্টারটি ব্যক্তিগত অ্যাকাউন্টে সুরক্ষিতভাবে সংরক্ষণ ও পুনরায় ডাউনলোড করার জন্য লগইন করা প্রয়োজন। আপনার বর্তমান ডিজাইনটি নিরাপদে সংরক্ষিত রয়েছে।
+              </p>
+            </div>
+
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
+              <a
+                href="/auth?redirect=/studio"
+                className="w-full sm:w-auto flex-1 inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs font-bold shadow-md shadow-emerald-700/20 transition-all active:scale-95"
+              >
+                <LogIn className="w-4 h-4" />
+                <span>লগইন / রেজিস্টার করুন</span>
+              </a>
+
+              <button
+                type="button"
+                onClick={() => setAuthModalOpen(false)}
+                className="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 text-xs font-bold transition-all"
+              >
+                বাতিল
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

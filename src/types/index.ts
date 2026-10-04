@@ -94,6 +94,7 @@ export interface IPosterFormData {
   designationFontSize?: number;
   footerPosX?: number;
   footerPosY?: number;
+  candidateAdjustments?: ICandidatePhotoAdjustments;
 }
 
 export interface ICandidatePhotoAdjustments {
@@ -109,11 +110,12 @@ export interface ICandidatePhotoAdjustments {
 
 export interface IPoster {
   _id: string;
-  userId: string;
+  userId: string | IUser;
   templateId: ITemplate | string;
   formData: IPosterFormData;
   topLeadersPhotos: ITopLeader[];
   candidatePhotoUrl: string;
+  candidateAdjustments?: ICandidatePhotoAdjustments;
   partySymbolUrl?: string;
   generatedImageUrl?: string;
   pdfExportUrl?: string;
@@ -121,18 +123,31 @@ export interface IPoster {
   errorMessage?: string;
   retryCount: number;
   aiEnhanced: boolean;
+  isFlagged?: boolean;
+  flagReason?: string;
   createdAt: string;
   updatedAt: string;
 }
 
 export interface IUser {
-  id: string;
+  id?: string;
+  _id?: string;
   name: string;
   emailOrPhone: string;
   role: 'user' | 'admin';
   avatarUrl?: string;
   createdAt?: string;
 }
+
+export interface IAdminStats {
+  totalUsers: number;
+  totalPosters: number;
+  completedPosters: number;
+  flaggedPosters: number;
+  totalTemplates: number;
+  recentPosters: IPoster[];
+}
+
 
 export interface IAISloganResponse {
   candidateName?: string;

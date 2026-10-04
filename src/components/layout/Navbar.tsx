@@ -19,13 +19,19 @@ import {
 
 export const Navbar: React.FC = () => {
   const pathname = usePathname();
-  const { user, logout, demoLogin } = useAuth();
+  const { user, logout } = useAuth();
   const { theme, toggleTheme } = useTheme();
+
+  // Hide global navbar completely on Admin Panel
+  if (pathname.startsWith('/admin')) {
+    return null;
+  }
 
   const navLinks = [
     { href: '/templates', label: 'টেমপ্লেট গ্যালারি', icon: LayoutTemplate },
     { href: '/studio', label: 'পোস্টার স্টুডিও', icon: Layers },
     { href: '/history', label: 'আমার পোস্টার হিস্ট্রি', icon: History },
+    ...(user?.role === 'admin' ? [{ href: '/admin', label: 'অ্যাডমিন প্যানেল', icon: Shield }] : []),
   ];
 
   return (
@@ -113,21 +119,13 @@ export const Navbar: React.FC = () => {
                 </button>
               </div>
             ) : (
-              <div className="flex items-center gap-2">
-                <button
-                  onClick={demoLogin}
-                  className="hidden sm:inline-flex px-3 py-1.5 rounded-xl bg-amber-500/10 dark:bg-slate-900 text-amber-700 dark:text-amber-300 border border-amber-500/30 hover:bg-amber-500/20 text-xs font-bold transition-all font-bengali"
-                >
-                  ডেমো লগইন
-                </button>
-                <Link
-                  href="/auth"
-                  className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition-all font-bengali shadow-sm shadow-emerald-600/30"
-                >
-                  <LogIn className="w-3.5 h-3.5" />
-                  <span>লগইন</span>
-                </Link>
-              </div>
+              <Link
+                href="/auth"
+                className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition-all font-bengali shadow-sm shadow-emerald-600/25 active:scale-95"
+              >
+                <LogIn className="w-3.5 h-3.5" />
+                <span>লগইন</span>
+              </Link>
             )}
           </div>
         </div>

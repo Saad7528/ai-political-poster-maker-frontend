@@ -17,6 +17,7 @@ import {
   Maximize2,
 } from 'lucide-react';
 import { ICandidatePhotoAdjustments } from '@/types';
+import { compressImage } from '@/lib/imageCompressor';
 
 interface CandidatePhotoUploaderProps {
   photoUrl: string;
@@ -51,39 +52,32 @@ export const CandidatePhotoUploader: React.FC<CandidatePhotoUploaderProps> = ({
     }
   }, [photoUrl, originalPhotoUrl]);
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
-      const reader = new FileReader();
-      reader.onload = (ev) => {
-        if (ev.target?.result) {
-          const url = ev.target.result as string;
-          setOriginalPhotoUrl(url);
-          setIsBgRemoved(false);
-          onSetPhotoUrl(url);
-        }
-      };
-      reader.readAsDataURL(file);
+      const compressedUrl = await compressImage(file, 1200, 1600, 0.85);
+      if (compressedUrl) {
+        setOriginalPhotoUrl(compressedUrl);
+        setIsBgRemoved(false);
+        onSetPhotoUrl(compressedUrl);
+      }
     }
   };
 
-  const handleDrop = (e: React.DragEvent) => {
+  const handleDrop = async (e: React.DragEvent) => {
     e.preventDefault();
     setDragOver(false);
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
       const file = e.dataTransfer.files[0];
-      const reader = new FileReader();
-      reader.onload = (ev) => {
-        if (ev.target?.result) {
-          const url = ev.target.result as string;
-          setOriginalPhotoUrl(url);
-          setIsBgRemoved(false);
-          onSetPhotoUrl(url);
-        }
-      };
-      reader.readAsDataURL(file);
+      const compressedUrl = await compressImage(file, 1200, 1600, 0.85);
+      if (compressedUrl) {
+        setOriginalPhotoUrl(compressedUrl);
+        setIsBgRemoved(false);
+        onSetPhotoUrl(compressedUrl);
+      }
     }
   };
+
 
   // High-Quality AI Background Removal with Fallback
   const handleRemoveBackground = async () => {

@@ -1,8 +1,18 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Sparkles, Printer, CheckCircle, Heart } from 'lucide-react';
 
 export const Footer: React.FC = () => {
+  const pathname = usePathname();
+
+  // Hide footer completely on Admin Panel
+  if (pathname.startsWith('/admin')) {
+    return null;
+  }
+
   return (
     <footer className="bg-slate-100 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-850 text-slate-600 dark:text-slate-400 font-bengali text-xs py-12 mt-16 transition-colors duration-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

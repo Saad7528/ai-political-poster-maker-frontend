@@ -44,14 +44,9 @@ export default function HomePage() {
     <div className="space-y-16 py-8">
       {/* Hero Section */}
       <section className="relative overflow-hidden pt-8 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/10 dark:bg-amber-400/10 border border-amber-500/30 text-amber-700 dark:text-amber-300 text-xs sm:text-sm font-bold mb-6">
-          <Sparkles className="w-4 h-4 animate-pulse text-amber-500 dark:text-amber-400" />
-          <span>গুগল জেমিনি এআই চালিত বাংলাদেশি রাজনৈতিক পোস্টার মেকার</span>
-        </div>
-
         <h1 className="text-3xl sm:text-6xl font-black text-slate-900 dark:text-white tracking-tight leading-tight max-w-4xl mx-auto font-bengali">
           মুহূর্তেই তৈরি করুন <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 via-rose-600 to-amber-600 dark:from-amber-300 dark:via-rose-400 dark:to-emerald-400">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-500 dark:from-emerald-400 dark:via-teal-300 dark:to-emerald-300">
             খাঁটি বাংলাদেশি রাজনৈতিক পোস্টার
           </span>
         </h1>
@@ -63,7 +58,7 @@ export default function HomePage() {
         <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
           <Link
             href="/studio"
-            className="w-full sm:w-auto flex items-center justify-center gap-2.5 px-8 py-4 rounded-2xl bg-gradient-to-r from-emerald-600 via-rose-600 to-amber-500 hover:from-emerald-500 hover:to-amber-400 text-white font-black text-base shadow-xl shadow-emerald-700/20 transition-all active:scale-95 font-bengali"
+            className="w-full sm:w-auto flex items-center justify-center gap-2.5 px-8 py-4 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-black text-base shadow-xl shadow-emerald-600/20 transition-all active:scale-95 font-bengali"
           >
             <Sparkles className="w-5 h-5 fill-current" />
             <span>পোস্টার স্টুডিওতে ডিজাইন শুরু করুন</span>

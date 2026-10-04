@@ -1,11 +1,15 @@
 'use client';
 
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, forwardRef, useImperativeHandle } from 'react';
 import { ITemplate, IPosterFormData, ITopLeader, PosterArchetype, ICandidatePhotoAdjustments } from '@/types';
 import { BANGLADESHI_POLITICAL_PARTIES } from '@/data/politicalParties';
 import { Download, FileText, ZoomIn, ZoomOut, Move, Edit3, Check, Sparkles, Loader2 } from 'lucide-react';
 import jsPDF from 'jspdf';
 import { toPng } from 'html-to-image';
+
+export interface PosterCanvasHandle {
+  getSnapshotUrl: () => Promise<string>;
+}
 
 interface PosterCanvasProps {
   template?: ITemplate | null;
@@ -20,23 +24,23 @@ interface PosterCanvasProps {
   onExportSuccess?: (url: string) => void;
 }
 
-export const PosterCanvas: React.FC<PosterCanvasProps> = ({
+export const PosterCanvas = forwardRef<PosterCanvasHandle, PosterCanvasProps>(({
   template,
   formData,
   topLeaders,
   candidatePhotoUrl,
   partySymbolUrl,
   candidateAdjustments = {
-    scale: 1,
+    scale: 1.85,
     posX: 0,
-    posY: 0,
+    posY: 25,
     frameStyle: 'cutout',
     enableGlow: true,
   },
   onUpdateFormData,
   onUpdateCandidateAdjustments,
   onUpdateTopLeader,
-}) => {
+}, ref) => {
   const posterRef = useRef<HTMLDivElement>(null);
   const [viewScale, setViewScale] = useState<number>(0.72);
 
@@ -300,6 +304,33 @@ export const PosterCanvas: React.FC<PosterCanvasProps> = ({
     onUpdateTopLeader,
     onUpdateFormData,
   ]);
+
+  useImperativeHandle(ref, () => ({
+    getSnapshotUrl: async () => {
+      if (!posterRef.current) return '';
+      const originalTransform = posterRef.current.style.transform;
+      try {
+        posterRef.current.style.transform = 'scale(1)';
+        const dataUrl = await toPng(posterRef.current, {
+          width: 600,
+          height: 800,
+          canvasWidth: 600,
+          canvasHeight: 800,
+          pixelRatio: 1.0,
+          quality: 0.85,
+          backgroundColor: colors.background,
+        });
+        return dataUrl;
+      } catch (err) {
+        console.error('Snapshot failed:', err);
+        return '';
+      } finally {
+        if (posterRef.current) {
+          posterRef.current.style.transform = originalTransform;
+        }
+      }
+    },
+  }));
 
   const [isExportingPNG, setIsExportingPNG] = useState(false);
   const [isExportingPDF, setIsExportingPDF] = useState(false);
@@ -1380,4 +1411,6 @@ export const PosterCanvas: React.FC<PosterCanvasProps> = ({
       </div>
     </div>
   );
-};
+});
+
+PosterCanvas.displayName = 'PosterCanvas';
