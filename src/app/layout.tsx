@@ -16,6 +16,11 @@ export const metadata: Metadata = {
   title: 'পোস্টারমেকার AI — বাংলাদেশি রাজনৈতিক ও নির্বাচনী পোস্টার মেকার',
   description:
     'গুগল জেমিনি এআই চালিত বাংলাদেশি রাজনৈতিক নির্বাচনী, বিজয় দিবস, শোক দিবস ও উৎসবের পোস্টার তৈরির আধুনিক ডিজিটাল প্ল্যাটফর্ম।',
+  icons: {
+    icon: '/logo.png',
+    shortcut: '/logo.png',
+    apple: '/logo.png',
+  },
 };
 
 export default function RootLayout({
