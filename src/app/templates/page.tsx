@@ -164,6 +164,37 @@ function TemplatePreviewCard({ tpl }: { tpl: ITemplate }) {
   );
 }
 
+function TemplateCardSkeleton() {
+  return (
+    <div className="p-5 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800/80 shadow-sm flex flex-col justify-between space-y-4 animate-pulse">
+      <div className="space-y-3">
+        {/* Card Poster Frame Skeleton */}
+        <div className="w-full h-64 rounded-2xl p-4 bg-slate-100 dark:bg-slate-800/60 flex flex-col justify-between relative overflow-hidden border border-slate-200/60 dark:border-slate-700/50">
+          <div className="flex items-center justify-between">
+            <div className="h-3 w-28 bg-slate-200 dark:bg-slate-700 rounded-md" />
+            <div className="flex gap-1.5">
+              <div className="w-5 h-5 rounded-full bg-slate-200 dark:bg-slate-700" />
+              <div className="w-5 h-5 rounded-full bg-slate-200 dark:bg-slate-700" />
+            </div>
+          </div>
+          <div className="space-y-2 text-center my-auto flex flex-col items-center">
+            <div className="h-4 w-3/4 bg-slate-200 dark:bg-slate-700 rounded-md" />
+            <div className="h-3 w-1/2 bg-slate-200 dark:bg-slate-700 rounded-md" />
+          </div>
+          <div className="h-7 w-full bg-slate-200 dark:bg-slate-700 rounded-xl" />
+        </div>
+        {/* Info Titles skeleton */}
+        <div className="space-y-2 pt-1">
+          <div className="h-4 w-3/5 bg-slate-200 dark:bg-slate-800 rounded-md" />
+          <div className="h-3 w-2/5 bg-slate-200 dark:bg-slate-800 rounded-md" />
+        </div>
+      </div>
+      {/* Button skeleton */}
+      <div className="h-10 w-full rounded-xl bg-slate-200 dark:bg-slate-800" />
+    </div>
+  );
+}
+
 function TemplatesContent() {
   const searchParams = useSearchParams();
   const initialOccasion = searchParams.get('occasion') || 'all';
@@ -224,11 +255,12 @@ function TemplatesContent() {
         ))}
       </div>
 
-      {/* Loading / Grid */}
+      {/* Loading Skeleton / Grid */}
       {loading ? (
-        <div className="py-20 flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 gap-3">
-          <Loader2 className="w-8 h-8 animate-spin text-emerald-600 dark:text-emerald-400" />
-          <p className="text-xs">টেমপ্লেট লোড হচ্ছে...</p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {Array.from({ length: 6 }).map((_, i) => (
+            <TemplateCardSkeleton key={i} />
+          ))}
         </div>
       ) : templates.length === 0 ? (
         <div className="py-16 text-center text-slate-500 dark:text-slate-400 text-xs">
