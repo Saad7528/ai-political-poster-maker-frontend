@@ -225,10 +225,7 @@ function TemplatesContent() {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 font-bengali">
       {/* Header */}
       <div className="text-center max-w-3xl mx-auto space-y-3">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-800 text-emerald-700 dark:text-emerald-400 text-xs font-bold">
-          <CheckCircle2 className="w-3.5 h-3.5" />
-          <span>১০+ রেডিমেড প্রফেশনাল পলিটিক্যাল টেমপ্লেট</span>
-        </div>
+       
         <h1 className="text-2xl sm:text-4xl font-black text-slate-900 dark:text-white">
           রেডিমেড রাজনৈতিক পোস্টার টেমপ্লেট লাইব্রেরি
         </h1>

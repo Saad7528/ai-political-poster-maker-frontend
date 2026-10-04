@@ -149,22 +149,13 @@ export default function HistoryPage() {
               পোস্টার হিস্ট্রি হলো আপনার ব্যক্তিগত সংরক্ষিত পোস্টারের তালিকা। আপনার তৈরিকৃত পোস্টার দেখতে ও নিরাপদে সেভ রাখতে অ্যাকাউন্টে লগইন থাকা প্রয়োজন।
             </p>
           </div>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
+          <div className="flex items-center justify-center pt-2">
             <Link
               href="/auth?redirect=/history"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs font-bold shadow-md transition-all active:scale-95"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs font-bold shadow-md shadow-emerald-700/20 transition-all active:scale-95"
             >
               <span>লগইন / রেজিস্টার করুন</span>
             </Link>
-            <button
-              type="button"
-              onClick={async () => {
-                await demoLogin();
-              }}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 hover:bg-slate-200 text-xs font-bold transition-all"
-            >
-              <span>ডেমো অ্যাকাউন্ট দিয়ে দেখুন</span>
-            </button>
           </div>
         </div>
       ) : posters.length === 0 ? (
