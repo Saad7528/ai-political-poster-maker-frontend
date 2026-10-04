@@ -484,6 +484,10 @@ export const PosterCanvas = forwardRef<PosterCanvasHandle, PosterCanvasProps>(({
       >
         <div
           ref={posterRef}
+          onClick={() => {
+            setActiveControl(null);
+            setEditingField(null);
+          }}
           style={{
             transform: `scale(${viewScale})`,
             transformOrigin: 'top left',
@@ -546,13 +550,13 @@ export const PosterCanvas = forwardRef<PosterCanvasHandle, PosterCanvasProps>(({
 
           {/* 1. TOP HEADER ROW (Top Leaders) */}
           <div className="relative z-10 pt-4 px-6">
-            <div className="flex items-center justify-between mb-2 gap-1.5">
+            <div className="grid grid-cols-3 items-center mb-2 gap-1.5 w-full">
               <div
                 onClick={(e) => {
                   e.stopPropagation();
                   setEditingField('leftHeaderBadge');
                 }}
-                className={`px-2.5 py-0.5 rounded-full text-[9.5px] font-black font-bengali shadow border truncate max-w-[165px] cursor-pointer hover:ring-1 hover:ring-amber-300 ${
+                className={`justify-self-start px-2.5 py-0.5 rounded-full text-[9.5px] font-black font-bengali shadow border truncate max-w-[165px] cursor-pointer hover:ring-1 hover:ring-amber-300 ${
                   occasion === 'shok_dibosh'
                     ? 'bg-zinc-900 text-white border-zinc-500'
                     : occasion === 'pohela_boishakh'
@@ -590,7 +594,7 @@ export const PosterCanvas = forwardRef<PosterCanvasHandle, PosterCanvasProps>(({
                   e.stopPropagation();
                   setEditingField('religiousHeader');
                 }}
-                className="px-3.5 py-0.5 rounded-full text-[11px] font-bold font-bengali text-amber-200 bg-black/75 border border-amber-400/70 shadow-md flex-shrink-0 cursor-pointer hover:ring-1 hover:ring-amber-300"
+                className="justify-self-center px-3.5 py-0.5 rounded-full text-[11px] font-bold font-bengali text-amber-200 bg-black/75 border border-amber-400/70 shadow-md flex-shrink-0 cursor-pointer hover:ring-1 hover:ring-amber-300"
                 title="হেডার এডিট করতে ক্লিক করুন"
               >
                 {editingField === 'religiousHeader' ? (
@@ -613,7 +617,7 @@ export const PosterCanvas = forwardRef<PosterCanvasHandle, PosterCanvasProps>(({
                   e.stopPropagation();
                   setEditingField('rightHeaderBadge');
                 }}
-                className={`px-2.5 py-0.5 rounded-full text-[9.5px] font-black font-bengali shadow border truncate max-w-[165px] cursor-pointer hover:ring-1 hover:ring-amber-300 ${
+                className={`justify-self-end px-2.5 py-0.5 rounded-full text-[9.5px] font-black font-bengali shadow border truncate max-w-[165px] cursor-pointer hover:ring-1 hover:ring-amber-300 ${
                   occasion === 'shok_dibosh'
                     ? 'bg-zinc-900 text-white border-zinc-500'
                     : occasion === 'pohela_boishakh'
@@ -647,18 +651,29 @@ export const PosterCanvas = forwardRef<PosterCanvasHandle, PosterCanvasProps>(({
               </div>
             </div>
 
-            {/* Top Leaders Row (Supports 1-4 Leaders) */}
+            {/* Top Leaders Row (Supports 1-4 Leaders with Equidistant Grid) */}
             <div
               onClick={(e) => {
                 e.stopPropagation();
                 setActiveControl(activeControl === 'leaders' ? null : 'leaders');
               }}
-              className="relative group/leaders flex items-center justify-around gap-2 pt-1 pb-2 px-1"
+              style={{
+                marginTop: `${formData.leadersMarginTop ?? 14}px`,
+              }}
+              className={`relative group/leaders grid ${
+                topLeaders.slice(0, 4).length === 1
+                  ? 'grid-cols-1'
+                  : topLeaders.slice(0, 4).length === 2
+                  ? 'grid-cols-2'
+                  : topLeaders.slice(0, 4).length === 3
+                  ? 'grid-cols-3'
+                  : 'grid-cols-4'
+              } place-items-center gap-2 pb-2 px-1 w-full transition-all`}
             >
               {/* Quick controls on canvas hover / active click for top leaders */}
               <div
-                className={`absolute -top-4 left-1/2 -translate-x-1/2 ${
-                  activeControl === 'leaders' ? 'flex ring-2 ring-amber-400' : 'hidden group-hover/leaders:flex'
+                className={`absolute -top-6 left-1/2 -translate-x-1/2 ${
+                  activeControl === 'leaders' ? 'flex ring-2 ring-amber-400 animate-in fade-in zoom-in-95' : 'hidden'
                 } items-center gap-1.5 z-30 bg-slate-900/98 border border-amber-400/90 px-3 py-1 rounded-full shadow-2xl text-[10px] font-bold text-amber-300 whitespace-nowrap`}
               >
                 <span>ফ্রেম:</span>
@@ -683,6 +698,32 @@ export const PosterCanvas = forwardRef<PosterCanvasHandle, PosterCanvasProps>(({
                   }}
                   className="px-1 py-0.5 rounded hover:bg-white/20 text-white font-bold"
                   title="মেডেলিয়ন ফ্রেম বড় করুন"
+                >
+                  +
+                </button>
+                <span className="text-amber-400/40">|</span>
+                <span>গ্যাপ:</span>
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    const cur = formData.leadersMarginTop ?? 14;
+                    onUpdateFormData && onUpdateFormData({ leadersMarginTop: Math.max(2, cur - 3) });
+                  }}
+                  className="px-1 py-0.5 rounded hover:bg-white/20 text-white font-bold"
+                  title="উপরের লেখার সাথে ফাঁকা জায়গা কমান"
+                >
+                  −
+                </button>
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    const cur = formData.leadersMarginTop ?? 14;
+                    onUpdateFormData && onUpdateFormData({ leadersMarginTop: Math.min(48, cur + 3) });
+                  }}
+                  className="px-1 py-0.5 rounded hover:bg-white/20 text-white font-bold"
+                  title="উপরের লেখার সাথে ফাঁকা জায়গা বাড়ান"
                 >
                   +
                 </button>
@@ -712,7 +753,7 @@ export const PosterCanvas = forwardRef<PosterCanvasHandle, PosterCanvasProps>(({
                 >
                   +
                 </button>
-                {(topLeaders.some(l => (l.posX && l.posX !== 0) || (l.posY && l.posY !== 0)) || (formData.leadersFrameSize && formData.leadersFrameSize !== 64) || (formData.leaderTextSize && formData.leaderTextSize !== 9)) && (
+                {(topLeaders.some(l => (l.posX && l.posX !== 0) || (l.posY && l.posY !== 0)) || (formData.leadersFrameSize && formData.leadersFrameSize !== 64) || (formData.leaderTextSize && formData.leaderTextSize !== 9) || (formData.leadersMarginTop !== undefined && formData.leadersMarginTop !== 14)) && (
                   <button
                     type="button"
                     onClick={(e) => {
@@ -720,10 +761,10 @@ export const PosterCanvas = forwardRef<PosterCanvasHandle, PosterCanvasProps>(({
                       topLeaders.forEach((_, i) => {
                         onUpdateTopLeader && onUpdateTopLeader(i, { posX: 0, posY: 0 });
                       });
-                      onUpdateFormData && onUpdateFormData({ leadersFrameSize: 64, leaderTextSize: 9 });
+                      onUpdateFormData && onUpdateFormData({ leadersFrameSize: 64, leaderTextSize: 9, leadersMarginTop: 14 });
                     }}
                     className="ml-1 px-1.5 py-0.5 rounded bg-amber-500/20 hover:bg-amber-500 hover:text-slate-950 text-amber-300 font-bold"
-                    title="নেতাদের ছবির পজিশন ও সাইজ রিসেট করুন"
+                    title="নেতাদের ছবির পজিশন, গ্যাপ ও সাইজ রিসেট করুন"
                   >
                     ↺ রিসেট
                   </button>
@@ -733,21 +774,22 @@ export const PosterCanvas = forwardRef<PosterCanvasHandle, PosterCanvasProps>(({
               {topLeaders.slice(0, 4).map((leader, idx) => {
                 const totalCount = Math.min(topLeaders.length, 4);
                 const isCenter = totalCount === 3 && idx === 1;
-                const baseSize = formData.leadersFrameSize || (totalCount === 4 ? 56 : isCenter ? 76 : 64);
-                const sizePx = isCenter ? baseSize + 12 : baseSize;
+                const baseSize = formData.leadersFrameSize || (totalCount === 4 ? 56 : isCenter ? 78 : 64);
+                const sizePx = isCenter ? baseSize + 14 : baseSize;
                 const nameFontSize = formData.leaderTextSize || 9;
                 const titleFontSize = Math.max(6.5, (formData.leaderTextSize || 9) - 1.5);
 
                 return (
-                  <div key={idx} className="flex flex-col items-center group flex-1 min-w-0 max-w-[200px] px-1">
+                  <div key={idx} className="flex flex-col items-center group w-full px-1">
                     <div
                       onMouseDown={(e) => leader.url && handleLeaderMouseDown(e, idx)}
                       style={{
                         width: `${sizePx}px`,
                         height: `${sizePx}px`,
                       }}
-                      className={`relative rounded-full overflow-hidden shadow-xl border-2 border-amber-400 bg-slate-900 cursor-grab active:cursor-grabbing flex items-center justify-center flex-shrink-0 ${isCenter ? 'ring-4 ring-rose-600/80 -mt-1' : 'ring-2 ring-amber-400/60'
-                        }`}
+                      className={`relative rounded-full overflow-hidden shadow-xl border-2 border-amber-400 bg-slate-900 cursor-grab active:cursor-grabbing flex items-center justify-center flex-shrink-0 transition-all ${
+                        isCenter ? 'ring-4 ring-rose-600/90 -mt-1.5' : 'ring-2 ring-amber-400/60'
+                      }`}
                       title={leader.url ? 'ক্যানভাসে টেনে পজিশন পরিবর্তন করুন' : undefined}
                     >
                       {leader.url ? (
@@ -773,7 +815,7 @@ export const PosterCanvas = forwardRef<PosterCanvasHandle, PosterCanvasProps>(({
                         setEditingField(`leader_${idx}`);
                       }}
                       style={{ fontSize: `${nameFontSize}px` }}
-                      className="mt-1 px-3 py-0.5 rounded-full text-center font-bold font-bengali bg-slate-900/95 text-amber-200 border border-amber-400/60 cursor-pointer hover:ring-1 hover:ring-amber-400 shadow-md whitespace-nowrap w-auto max-w-[190px] overflow-visible"
+                      className="mt-1 px-2.5 py-0.5 rounded-full text-center font-bold font-bengali bg-slate-900/95 text-amber-200 border border-amber-400/60 cursor-pointer hover:ring-1 hover:ring-amber-400 shadow-md whitespace-nowrap w-auto max-w-[190px] overflow-visible"
                     >
                       {editingField === `leader_${idx}` ? (
                         <input
@@ -934,7 +976,7 @@ export const PosterCanvas = forwardRef<PosterCanvasHandle, PosterCanvasProps>(({
               {/* Quick controls on canvas hover / active click for candidate frame */}
               <div
                 className={`absolute -top-4 left-1/2 -translate-x-1/2 ${
-                  activeControl === 'candidate' ? 'flex ring-2 ring-amber-400' : 'hidden group-hover/candidate:flex'
+                  activeControl === 'candidate' ? 'flex ring-2 ring-amber-400 animate-in fade-in zoom-in-95' : 'hidden'
                 } items-center gap-1.5 z-30 bg-slate-900/98 border border-amber-400/90 px-3 py-1 rounded-full shadow-2xl text-[10px] font-bold text-amber-300 whitespace-nowrap`}
               >
                 <span>প্রার্থীর ফ্রেম:</span>
@@ -1110,7 +1152,7 @@ export const PosterCanvas = forwardRef<PosterCanvasHandle, PosterCanvasProps>(({
                   {/* Stable Click-Pinned Controls for Symbol Size & Reset */}
                   <div
                     className={`absolute -top-8 right-0 ${
-                      activeControl === 'symbol' ? 'flex ring-2 ring-amber-400' : 'hidden group-hover/symbol:flex'
+                      activeControl === 'symbol' ? 'flex ring-2 ring-amber-400 animate-in fade-in zoom-in-95' : 'hidden'
                     } items-center gap-1 z-30 bg-slate-900/98 border border-amber-400/90 px-2.5 py-1 rounded-full shadow-2xl text-[9.5px] font-bold text-amber-300 whitespace-nowrap`}
                   >
                     <span>প্রতীক:</span>
@@ -1180,7 +1222,7 @@ export const PosterCanvas = forwardRef<PosterCanvasHandle, PosterCanvasProps>(({
               {/* Quick controls for Slogan font size & reset */}
               <div
                 className={`absolute -top-4 left-1/2 -translate-x-1/2 ${
-                  activeControl === 'slogan' ? 'flex ring-2 ring-amber-400' : 'hidden group-hover/slogan:flex'
+                  activeControl === 'slogan' ? 'flex ring-2 ring-amber-400 animate-in fade-in zoom-in-95' : 'hidden'
                 } items-center gap-1.5 z-30 bg-slate-900/98 border border-amber-400/90 px-3 py-1 rounded-full shadow-2xl text-[10px] font-bold text-amber-300 whitespace-nowrap`}
               >
                 <span>ফন্ট:</span>
@@ -1273,7 +1315,7 @@ export const PosterCanvas = forwardRef<PosterCanvasHandle, PosterCanvasProps>(({
             {/* Stable Click-Pinned controls on Footer */}
             <div
               className={`absolute -top-4 left-1/2 -translate-x-1/2 ${
-                activeControl === 'footer' ? 'flex ring-2 ring-amber-400' : 'hidden group-hover/footer:flex'
+                activeControl === 'footer' ? 'flex ring-2 ring-amber-400 animate-in fade-in zoom-in-95' : 'hidden'
               } items-center gap-1.5 z-30 bg-slate-900/98 border border-amber-400/90 px-3 py-1 rounded-full shadow-2xl text-[10px] font-bold text-amber-300 whitespace-nowrap`}
             >
               <span>নাম:</span>

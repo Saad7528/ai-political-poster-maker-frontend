@@ -78,6 +78,7 @@ export interface IPosterFormData {
   showLeaderTitles?: boolean;
   leadersFrameSize?: number;
   leaderTextSize?: number;
+  leadersMarginTop?: number;
   canvasBgTheme?: 'dark_green' | 'clean_white' | 'royal_emerald' | 'national_red_green' | 'classic_bw';
   headlinePosX?: number;
   headlinePosY?: number;
