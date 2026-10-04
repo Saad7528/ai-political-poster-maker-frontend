@@ -298,7 +298,7 @@ export default function AuthPage() {
             className="w-full py-2 px-3 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 text-amber-700 dark:text-amber-400 text-[11px] font-bold border border-amber-500/30 transition-all flex items-center justify-center gap-1.5 shadow-sm active:scale-95"
           >
             <Shield className="w-3.5 h-3.5 text-amber-500" />
-            <span>🛡️ অ্যাডমিন টেস্ট লগইন (১-ক্লিক)</span>
+            <span>অ্যাডমিন টেস্ট লগইন (১-ক্লিক)</span>
           </button>
         </div>
       </div>

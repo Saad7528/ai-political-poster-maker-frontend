@@ -21,7 +21,7 @@
 ## 🌟 Key Features
 
 ### 1. 🎨 Real-Time Interactive Poster Studio
-- **Live Canvas Rendering**: Instant preview of text headlines, subtitles, designated candidate details, party logos, and leadership banners.
+- **Live Canvas Rendering**: Instant preview of text headlines, subtitles, candidate details, party logos, and leadership banners.
 - **Photo Upload & Frame Adjuster**: Upload and position candidate portraits with scale, rotation, and aspect ratio controls.
 - **Multi-Party Presets**: Color schemes, party symbols, and leadership photo placements for major political parties, independent candidates, and national commemorative events.
 
@@ -47,7 +47,7 @@
 - **1-Click Admin Demo Login**: Instant access for evaluation and demonstration.
 
 ### 7. 🌓 Dark / Light Mode & 100% Mobile Responsive
-- Optimized for desktop, tablet, and mobile displays.
+- Optimized for desktop, tablet, and mobile displays with seamless dark/light theme switching.
 
 ---
 
@@ -183,28 +183,20 @@ frontend/
 
 - **Email**: `admin@politicalposter.bd`
 - **Password**: `Admin12345!`
-- *Or click the "🛡️ 1-Click Admin Demo Login" button on the login page.*
+- *Or click the "Admin Test Login (1-Click)" button on the authentication page.*
 
 ---
 
-## 🎯 Project Context & Evaluation Details
+## 👨‍💻 Author & Project Info
 
-> **Note**: This project was developed by **[S. M. Amirul Islam Saad](https://github.com/Saad7528)** as part of the technical assessment and practical evaluation for the **Full Stack Developer** position at **[Rise Together](https://risetogetherbd.com/)**.
-
-### 📋 Assessment Summary
-| Parameter | Details |
-|---|---|
-| **Challenge Name** | AI Political Poster Maker |
-| **Target Role** | Full Stack Developer |
-| **Company** | [Rise Together](https://risetogetherbd.com) |
-| **Candidate** | S. M. Amirul Islam Saad |
-| **Submission Deadline** | 10/4/2026, 11:59:00 PM |
-| **Status** | ✅ Completed, Verified & Deployed |
-| **Frontend Live URL** | [https://ai-political-poster-maker-frontend-xi.vercel.app](https://ai-political-poster-maker-frontend-xi.vercel.app/) |
-| **Backend API Live URL** | [https://ai-political-poster-maker-backend-nine.vercel.app](https://ai-political-poster-maker-backend-nine.vercel.app/) |
+- **Platform**: AI Political Poster Maker (ডিজিটাল পোস্টারমেকার)
+- **Developer**: [S. M. Amirul Islam Saad](https://github.com/Saad7528)
+- **Live Frontend**: [https://ai-political-poster-maker-frontend-xi.vercel.app](https://ai-political-poster-maker-frontend-xi.vercel.app/)
+- **Live Backend API**: [https://ai-political-poster-maker-backend-nine.vercel.app](https://ai-political-poster-maker-backend-nine.vercel.app/)
+- **License**: MIT License
 
 ---
 
-## 📄 License
-
-This project is licensed under the [MIT License](LICENSE).
+<div align="center">
+  <sub>Built with passion, patriotic pride, and modern web technologies ❤️</sub>
+</div>
