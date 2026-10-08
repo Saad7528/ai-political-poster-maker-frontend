@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
@@ -16,12 +16,33 @@ import {
   Layers,
   Sun,
   Moon,
+  Menu,
+  X,
+  Sparkles,
 } from 'lucide-react';
 
 export const Navbar: React.FC = () => {
   const pathname = usePathname();
   const { user, logout } = useAuth();
   const { theme, toggleTheme } = useTheme();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  // Close mobile drawer on route navigation
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [pathname]);
+
+  // Prevent background scrolling when mobile drawer is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileMenuOpen]);
 
   // Hide global navbar completely on Admin Panel & Auth Page
   if (pathname.startsWith('/admin') || pathname.startsWith('/auth')) {
@@ -36,126 +57,220 @@ export const Navbar: React.FC = () => {
   ];
 
   return (
-    <nav className="sticky top-0 z-50 bg-white/90 dark:bg-slate-950/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-100 shadow-sm dark:shadow-2xl transition-colors duration-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 sm:h-20">
-          {/* Professional Brand Logo */}
-          <Link href="/" className="flex items-center gap-3 group select-none">
-            <div className="w-12 h-12 rounded-xl overflow-hidden shadow-md group-hover:scale-105 transition-transform flex-shrink-0">
-              <img
-                src="/logo.png"
-                alt="AI Political Poster Maker"
-                className="w-full h-full object-cover"
-              />
-            </div>
-
-            <div>
-              <div className="flex items-center gap-2">
-                <span className="font-black text-lg sm:text-xl text-slate-900 dark:text-white tracking-tight font-bengali leading-none">
-                  পোস্টার<span className="theme-text-gradient">মেকার</span>
-                </span>
-              </div>
-              <p className="text-[11px] text-slate-500 dark:text-slate-400 font-bengali leading-none mt-1 hidden sm:block">
-                বাংলাদেশি ডিজিটাল রাজনৈতিক ও নির্বাচনী পোস্টার প্ল্যাটফর্ম
-              </p>
-            </div>
-          </Link>
-
-          {/* Desktop Navigation Links */}
-          <div className="hidden md:flex items-center gap-1.5 lg:gap-2">
-            {navLinks.map((link) => {
-              const Icon = link.icon;
-              const isActive = pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href));
-              return (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={`flex items-center gap-2 px-3.5 lg:px-4 py-2 rounded-xl text-xs font-bold transition-all font-bengali whitespace-nowrap flex-shrink-0 ${
-                    isActive
-                      ? 'theme-btn-primary active:scale-95'
-                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-300 dark:hover:text-white dark:hover:bg-slate-800'
-                  }`}
-                >
-                  <Icon className="w-4 h-4 flex-shrink-0" />
-                  <span>{link.label}</span>
-                </Link>
-              );
-            })}
-          </div>
-
-          {/* Right Action Bar: Palette Picker + Theme Toggle + User Auth */}
-          <div className="flex items-center gap-2 sm:gap-2.5">
-            {/* 10 Theme Palette Picker Dropdown */}
-            <PalettePicker />
-
-            {/* Dark/Light Theme Toggle Switch */}
-            <button
-              onClick={toggleTheme}
-              type="button"
-              aria-label="Toggle Dark/Light Mode"
-              title={theme === 'dark' ? 'লাইট মোডে পরিবর্তন করুন' : 'ডার্ক মোডে পরিবর্তন করুন'}
-              className="p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-900 text-slate-700 dark:text-amber-400 hover:bg-slate-200 dark:hover:bg-slate-800 transition-all active:scale-95 shadow-sm"
+    <>
+      <nav className="sticky top-0 z-50 bg-white/95 dark:bg-slate-950/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-100 shadow-sm transition-colors duration-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16 sm:h-20">
+            {/* Professional Brand Logo */}
+            <Link
+              href="/"
+              onClick={() => setMobileMenuOpen(false)}
+              className="flex items-center gap-2.5 sm:gap-3 group select-none flex-shrink-0"
             >
-              {theme === 'dark' ? (
-                <Sun className="w-4 h-4 text-amber-400 animate-in spin-in-180" />
-              ) : (
-                <Moon className="w-4 h-4 text-slate-700 animate-in spin-in-180" />
-              )}
-            </button>
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl overflow-hidden shadow-md group-hover:scale-105 transition-transform flex-shrink-0">
+                <img
+                  src="/logo.png"
+                  alt="AI Political Poster Maker"
+                  className="w-full h-full object-cover"
+                />
+              </div>
 
-            {/* User Auth Buttons */}
-            {user ? (
-              <div className="flex items-center gap-1.5 sm:gap-2">
-                <div className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
-                  <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full theme-subtle-bg flex items-center justify-center text-xs">
-                    {user.role === 'admin' ? <Shield className="w-3 h-3 sm:w-3.5 sm:h-3.5" /> : <User className="w-3 h-3 sm:w-3.5 sm:h-3.5" />}
-                  </div>
-                  <span className="text-[11px] sm:text-xs font-bold text-slate-800 dark:text-slate-200 truncate max-w-[70px] sm:max-w-[120px] font-bengali">
-                    {user.name}
+              <div>
+                <div className="flex items-center gap-1.5">
+                  <span className="font-black text-base sm:text-xl text-slate-900 dark:text-white tracking-tight font-bengali leading-none">
+                    পোস্টার<span className="theme-text-gradient">মেকার</span>
                   </span>
                 </div>
-                <button
-                  onClick={logout}
-                  title="লগআউট"
-                  className="p-2 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-500 hover:text-rose-500 hover:bg-rose-500/10 transition-colors active:scale-95"
-                >
-                  <LogOut className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                </button>
+                <p className="text-[10px] sm:text-[11px] text-slate-500 dark:text-slate-400 font-bengali leading-none mt-1 hidden md:block">
+                  বাংলাদেশি ডিজিটাল রাজনৈতিক ও নির্বাচনী পোস্টার প্ল্যাটফর্ম
+                </p>
               </div>
-            ) : (
-              <Link
-                href="/auth"
-                className="flex items-center gap-1.5 px-3 sm:px-4 py-2 rounded-xl theme-btn-primary text-xs font-bold transition-all font-bengali active:scale-95 whitespace-nowrap"
+            </Link>
+
+            {/* Desktop Navigation Links */}
+            <div className="hidden md:flex items-center gap-1.5 lg:gap-2">
+              {navLinks.map((link) => {
+                const Icon = link.icon;
+                const isActive = pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href));
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={`flex items-center gap-2 px-3.5 lg:px-4 py-2 rounded-xl text-xs font-bold transition-all font-bengali whitespace-nowrap flex-shrink-0 ${
+                      isActive
+                        ? 'theme-btn-primary active:scale-95'
+                        : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-300 dark:hover:text-white dark:hover:bg-slate-800'
+                    }`}
+                  >
+                    <Icon className="w-4 h-4 flex-shrink-0" />
+                    <span>{link.label}</span>
+                  </Link>
+                );
+              })}
+            </div>
+
+            {/* Right Action Bar */}
+            <div className="flex items-center gap-1.5 sm:gap-2.5">
+              {/* 10 Theme Palette Picker Dropdown */}
+              <PalettePicker />
+
+              {/* Dark/Light Theme Toggle Switch */}
+              <button
+                onClick={toggleTheme}
+                type="button"
+                aria-label="Toggle Dark/Light Mode"
+                title={theme === 'dark' ? 'লাইট মোডে পরিবর্তন করুন' : 'ডার্ক মোডে পরিবর্তন করুন'}
+                className="p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-900 text-slate-700 dark:text-amber-400 hover:bg-slate-200 dark:hover:bg-slate-800 transition-all active:scale-95 shadow-sm flex-shrink-0"
               >
-                <LogIn className="w-3.5 h-3.5" />
-                <span>লগইন</span>
-              </Link>
-            )}
+                {theme === 'dark' ? (
+                  <Sun className="w-4 h-4 text-amber-400 animate-in spin-in-180" />
+                ) : (
+                  <Moon className="w-4 h-4 text-slate-700 animate-in spin-in-180" />
+                )}
+              </button>
+
+              {/* Desktop User Auth Controls */}
+              <div className="hidden sm:flex items-center gap-2">
+                {user ? (
+                  <div className="flex items-center gap-1.5 sm:gap-2">
+                    <div className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+                      <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full theme-subtle-bg flex items-center justify-center text-xs">
+                        {user.role === 'admin' ? <Shield className="w-3 h-3 sm:w-3.5 sm:h-3.5" /> : <User className="w-3 h-3 sm:w-3.5 sm:h-3.5" />}
+                      </div>
+                      <span className="text-[11px] sm:text-xs font-bold text-slate-800 dark:text-slate-200 truncate max-w-[70px] sm:max-w-[120px] font-bengali">
+                        {user.name}
+                      </span>
+                    </div>
+                    <button
+                      onClick={logout}
+                      title="লগআউট"
+                      className="p-2 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-500 hover:text-rose-500 hover:bg-rose-500/10 transition-colors active:scale-95"
+                    >
+                      <LogOut className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                    </button>
+                  </div>
+                ) : (
+                  <Link
+                    href="/auth"
+                    className="flex items-center gap-1.5 px-3 sm:px-4 py-2 rounded-xl theme-btn-primary text-xs font-bold transition-all font-bengali active:scale-95 whitespace-nowrap"
+                  >
+                    <LogIn className="w-3.5 h-3.5" />
+                    <span>লগইন</span>
+                  </Link>
+                )}
+              </div>
+
+              {/* Mobile Hamburger Menu Toggle Button */}
+              <button
+                type="button"
+                onClick={() => setMobileMenuOpen((prev) => !prev)}
+                aria-label="Toggle Navigation Menu"
+                aria-expanded={mobileMenuOpen}
+                className="md:hidden p-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-900 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-800 transition-all active:scale-95 shadow-sm"
+              >
+                {mobileMenuOpen ? (
+                  <X className="w-4 h-4 animate-in spin-in-90" />
+                ) : (
+                  <Menu className="w-4 h-4 animate-in fade-in" />
+                )}
+              </button>
+            </div>
           </div>
         </div>
+      </nav>
 
-        {/* Mobile Submenu - Horizontally scrollable */}
-        <div className="md:hidden flex items-center gap-1 py-2 px-1 border-t border-slate-200 dark:border-slate-800 text-xs font-bengali overflow-x-auto no-scrollbar">
-          {navLinks.map((link) => {
-            const Icon = link.icon;
-            const isActive = pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href));
-            return (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`flex-1 min-w-fit flex items-center justify-center gap-1.5 px-2.5 py-1.5 rounded-xl font-bold transition-all whitespace-nowrap text-[11px] sm:text-xs ${
-                  isActive
-                    ? 'theme-btn-primary font-black shadow-sm'
-                    : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800'
-                }`}
-              >
-                <Icon className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
-                <span>{link.label}</span>
-              </Link>
-            );
-          })}
+      {/* Mobile Navigation Drawer / Sliding Sheet */}
+      {mobileMenuOpen && (
+        <div className="md:hidden fixed inset-0 z-40 bg-slate-950/60 backdrop-blur-sm animate-in fade-in duration-200">
+          <div className="fixed top-16 inset-x-0 bottom-0 bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border-b border-slate-200 dark:border-slate-800 shadow-2xl p-4 sm:p-6 flex flex-col justify-between overflow-y-auto font-bengali animate-in slide-in-from-top-4 duration-200">
+            <div className="space-y-4">
+              {/* User Status in Mobile Menu */}
+              {user ? (
+                <div className="p-3.5 rounded-2xl bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-2xl theme-subtle-bg theme-text-accent flex items-center justify-center font-bold">
+                      {user.role === 'admin' ? <Shield className="w-5 h-5" /> : <User className="w-5 h-5" />}
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-slate-900 dark:text-white text-sm">
+                        {user.name}
+                      </h4>
+                      <p className="text-[11px] text-slate-500 dark:text-slate-400">
+                        {user.role === 'admin' ? '🛡️ সিস্টেম অ্যাডমিন' : '👤 রেজিস্টার্ড ইউজার'}
+                      </p>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => {
+                      logout();
+                      setMobileMenuOpen(false);
+                    }}
+                    className="p-2 rounded-xl text-rose-500 hover:bg-rose-500/10 transition-colors flex items-center gap-1 text-xs font-bold"
+                  >
+                    <LogOut className="w-4 h-4" />
+                    <span>লগআউট</span>
+                  </button>
+                </div>
+              ) : (
+                <Link
+                  href="/auth"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="w-full py-3 px-4 rounded-2xl theme-btn-primary flex items-center justify-center gap-2 font-black text-sm shadow-md active:scale-95"
+                >
+                  <LogIn className="w-4 h-4" />
+                  <span>লগইন / সাইন আপ করুন</span>
+                </Link>
+              )}
+
+              {/* Navigation Links */}
+              <div className="space-y-1.5 pt-2">
+                <p className="text-[11px] font-bold text-slate-400 dark:text-slate-500 px-1">
+                  প্রধান মেনু
+                </p>
+                {navLinks.map((link) => {
+                  const Icon = link.icon;
+                  const isActive = pathname === link.href || (link.href !== '/' && pathname.startsWith(link.href));
+                  return (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className={`w-full flex items-center justify-between px-4 py-3.5 rounded-2xl font-bold text-sm transition-all active:scale-[0.98] ${
+                        isActive
+                          ? 'theme-btn-primary shadow-sm'
+                          : 'bg-slate-50 dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200'
+                      }`}
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className={`p-2 rounded-xl ${isActive ? 'bg-white/20' : 'theme-subtle-bg'}`}>
+                          <Icon className="w-4 h-4" />
+                        </div>
+                        <span>{link.label}</span>
+                      </div>
+                      {isActive && (
+                        <span className="text-[10px] font-black px-2 py-0.5 rounded-full bg-white/20">
+                          সক্রিয়
+                        </span>
+                      )}
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Mobile Footer Badge */}
+            <div className="pt-6 border-t border-slate-200 dark:border-slate-800 text-center space-y-1">
+              <div className="flex items-center justify-center gap-1.5 text-xs font-bold text-slate-500 dark:text-slate-400">
+                <Sparkles className="w-3.5 h-3.5 theme-text-accent" />
+                <span>AI Political Poster Maker BD</span>
+              </div>
+              <p className="text-[10px] text-slate-400 dark:text-slate-500">
+                ডিজিটাল নির্বাচনী ও রাজনৈতিক পোস্টার ডিজাইনার
+              </p>
+            </div>
+          </div>
         </div>
-      </div>
-    </nav>
+      )}
+    </>
   );
 };
